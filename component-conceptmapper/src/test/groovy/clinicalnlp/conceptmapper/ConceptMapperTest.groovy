@@ -3,8 +3,6 @@ package clinicalnlp.conceptmapper
 import static org.junit.Assert.*
 import groovy.util.logging.Log4j
 
-import org.apache.ctakes.typesystem.type.syntax.BaseToken
-import org.apache.ctakes.typesystem.type.textspan.Sentence
 import org.apache.log4j.BasicConfigurator
 import org.apache.log4j.Level
 import org.apache.uima.UIMAFramework
@@ -15,13 +13,13 @@ import org.apache.uima.fit.factory.AggregateBuilder
 import org.apache.uima.fit.factory.AnalysisEngineFactory
 import org.apache.uima.fit.factory.ExternalResourceFactory
 import org.apache.uima.jcas.JCas
-import org.apache.uima.resource.ExternalResourceDescription
 import org.apache.uima.util.XMLInputSource
 import org.junit.After
 import org.junit.Before
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
+
+import clinicalnlp.dsl.UIMAUtil
 
 @Log4j
 class ConceptMapperTest {

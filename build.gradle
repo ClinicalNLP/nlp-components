@@ -62,3 +62,7 @@ project(':component-negation') {
 project(':component-segment') {
     dependencies { compile project(':component-groovy-dsl') }
 }
+
+project(':component-conceptmapper') {
+	dependencies { compile project(':component-groovy-dsl') }
+}

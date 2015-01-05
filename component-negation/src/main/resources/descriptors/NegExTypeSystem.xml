@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>ClinicalNLPTypes</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <imports>
+    <import name="org.cleartk.ne.type.NamedEntity"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>clinicalnlp.type.NegationTrigger</name>
+      <description>Type defined in clinicalnlp.type</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>clinicalnlp.type.PreNegationTrigger</name>
+      <description>Type defined in clinicalnlp.type</description>
+      <supertypeName>clinicalnlp.type.NegationTrigger</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>clinicalnlp.type.PostNegationTrigger</name>
+      <description>Type defined in clinicalnlp.type</description>
+      <supertypeName>clinicalnlp.type.NegationTrigger</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>clinicalnlp.type.PseudoNegationTrigger</name>
+      <description>Type defined in clinicalnlp.type</description>
+      <supertypeName>clinicalnlp.type.NegationTrigger</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>clinicalnlp.type.NegationScopeTerminator</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>clinicalnlp.type.NegationScope</name>
+      <description>Type defined in clinicalnlp.type</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+  <typeDescription>
+      <name>clinicalnlp.type.NegatableNamedEntityMention</name>
+      <description/>
+      <supertypeName>org.cleartk.ne.type.NamedEntityMention</supertypeName>
+    <features>
+        <featureDescription>
+          <name>polarity</name>
+          <description/>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

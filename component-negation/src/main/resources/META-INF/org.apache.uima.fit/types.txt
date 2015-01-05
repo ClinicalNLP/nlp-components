@@ -1,0 +1,2 @@
+classpath*:org/cleartk/TypeSystem.xml
+classpath*:descriptors/NegExTypeSystem.xml

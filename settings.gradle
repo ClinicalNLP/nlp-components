@@ -1,5 +1,5 @@
 
 include 'component-groovy-dsl',
-        'component-negation',
-		'component-segment',
+        'component-negation-detector',
+		'component-segmenter',
         'component-conceptmapper'

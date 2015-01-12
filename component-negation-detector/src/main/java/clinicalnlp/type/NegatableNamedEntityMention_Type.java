@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Fri Dec 12 23:00:14 CST 2014 */
+/* First created by JCasGen Mon Jan 12 16:52:35 CST 2015 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.cleartk.ne.type.NamedEntityMention_Type;
 
 /** 
- * Updated by JCasGen Fri Dec 12 23:00:14 CST 2014
+ * Updated by JCasGen Mon Jan 12 16:52:35 CST 2015
  * @generated */
 public class NegatableNamedEntityMention_Type extends NamedEntityMention_Type {
   /** @generated 

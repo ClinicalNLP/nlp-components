@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Fri Dec 12 23:00:14 CST 2014 */
+/* First created by JCasGen Mon Jan 12 16:52:36 CST 2015 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas; 
@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Type defined in clinicalnlp.type
- * Updated by JCasGen Fri Dec 12 23:00:14 CST 2014
- * XML source: C:/WKT/git/BiomedicalNLP/nlp-components/component-negation/src/main/resources/descriptors/NegExTypeSystem.xml
+ * Updated by JCasGen Mon Jan 12 16:52:36 CST 2015
+ * XML source: C:/WKT/git/ClinicalNLP/nlp-components/component-negation-detector/src/main/resources/descriptors/NegExTypeSystem.xml
  * @generated */
 public class NegationScope extends Annotation {
   /** @generated

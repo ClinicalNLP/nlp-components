@@ -15,7 +15,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Annotation for dictionary lookup matches
- * Updated by JCasGen Mon Aug 25 12:28:12 CDT 2014
+ * Updated by JCasGen Mon Jan 12 17:37:04 CST 2015
  * @generated */
 public class DictTerm_Type extends Annotation_Type {
   /** @generated */

@@ -1,6 +1,6 @@
-package org.northshore.cbri.sent
+package clinicalnlp.sent
 
-import static org.northshore.cbri.dsl.UIMAUtil.*
+import static clinicalnlp.dsl.UIMAUtil.*
 import groovy.util.logging.Log4j
 
 import java.util.regex.Matcher
@@ -10,8 +10,6 @@ import opennlp.tools.sentdetect.SentenceDetectorME
 import opennlp.tools.sentdetect.SentenceModel
 import opennlp.tools.util.Span
 
-import org.apache.ctakes.typesystem.type.textspan.Segment
-import org.apache.ctakes.typesystem.type.textspan.Sentence
 import org.apache.log4j.Level
 import org.apache.uima.UimaContext
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException
@@ -20,12 +18,18 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.tcas.Annotation
 import org.apache.uima.resource.ResourceInitializationException
+import org.cleartk.token.type.Sentence
 import org.codehaus.groovy.control.CompilationFailedException
 import org.codehaus.groovy.control.CompilerConfiguration
-import org.northshore.cbri.dsl.UIMAUtil
+
+import clinicalnlp.dsl.UIMAUtil
+import clinicalnlp.type.Segment
 
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
+
+//import com.google.common.base.Charsets
+//import com.google.common.io.Resources
 
 @Log4j
 class SentenceDetector extends JCasAnnotator_ImplBase {
@@ -72,7 +76,7 @@ class SentenceDetector extends JCasAnnotator_ImplBase {
         try {
             if (segmentsToParse != null) {
                 CompilerConfiguration config = new CompilerConfiguration()
-                config.setScriptBaseClass("org.northshore.cbri.dsl.UIMAUtil")
+                config.setScriptBaseClass("clinicalnlp.dsl.UIMAUtil")
                 GroovyShell shell = new GroovyShell(config)
                 URL url = Resources.getResource(this.segmentsToParse)
                 String scriptContents = Resources.toString(url, Charsets.UTF_8)

@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Fri Dec 12 23:00:14 CST 2014 */
+/* First created by JCasGen Mon Jan 12 16:52:36 CST 2015 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas;
@@ -12,7 +12,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Dec 12 23:00:14 CST 2014
+ * Updated by JCasGen Mon Jan 12 16:52:36 CST 2015
  * @generated */
 public class NegationScopeTerminator_Type extends Annotation_Type {
   /** @generated 

@@ -1,5 +1,5 @@
-import static org.northshore.cbri.dsl.UIMAUtil.*
-import org.apache.ctakes.typesystem.type.textspan.Segment
+import static clinicalnlp.dsl.UIMAUtil.*
+import clinicalnlp.type.Segment
 
-segs = select(type:Segment, filter:{ it.id in ['FINAL_DIAGNOSIS'] })
+segs = select(type:Segment, filter:{ it.code in ['FINAL_DIAGNOSIS'] })
 

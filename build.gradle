@@ -47,20 +47,33 @@ project(':') {
 
     dependencies {
         compile project(':component-groovy-dsl')
-        compile project(':component-negation')
-        compile project(':component-segment')
+        compile project(':component-negation-detector')
+        compile project(':component-sentence-detector')
+        compile project(':component-segmenter')
+		compile project(':component-conceptmapper')
     }
 }
 
 project(':component-groovy-dsl') {
 }
 
-project(':component-negation') {
+project(':component-negation-detector') {
     dependencies { compile project(':component-groovy-dsl') }
 }
 
-project(':component-segment') {
+project(':component-segmenter') {
     dependencies { compile project(':component-groovy-dsl') }
+}
+
+project(':component-sentence-detector') {
+	dependencies { 
+		compile project(':component-groovy-dsl') 
+		compile project(':component-segmenter')
+		compile group: 'com.google.guava', name: 'guava', version: '18.0'
+		compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.5.3'
+		compile group: 'org.apache.opennlp', name: 'opennlp-uima', version: '1.5.3'
+		compile group: 'org.apache.opennlp', name: 'opennlp-maxent', version: '3.0.3'
+	}
 }
 
 project(':component-conceptmapper') {

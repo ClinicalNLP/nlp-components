@@ -13,8 +13,8 @@ import org.apache.uima.jcas.cas.FSArray;
 
 
 /** Annotation for dictionary lookup matches
- * Updated by JCasGen Mon Aug 25 12:28:12 CDT 2014
- * XML source: C:/WKT/git/uima-components/annotator-parent/annotator-conceptmapper/src/test/resources/descriptors/primitive/DictTerm.xml
+ * Updated by JCasGen Mon Jan 12 17:37:04 CST 2015
+ * XML source: C:/WKT/git/ClinicalNLP/nlp-components/component-conceptmapper/src/main/resources/descriptors/DictTerm.xml
  * @generated */
 public class DictTerm extends Annotation {
   /** @generated

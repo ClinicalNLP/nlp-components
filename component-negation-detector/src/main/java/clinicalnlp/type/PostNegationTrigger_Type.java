@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Fri Dec 12 23:00:14 CST 2014 */
+/* First created by JCasGen Mon Jan 12 16:52:36 CST 2015 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas;
@@ -11,7 +11,7 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 
 /** Type defined in clinicalnlp.type
- * Updated by JCasGen Fri Dec 12 23:00:14 CST 2014
+ * Updated by JCasGen Mon Jan 12 16:52:36 CST 2015
  * @generated */
 public class PostNegationTrigger_Type extends NegationTrigger_Type {
   /** @generated 

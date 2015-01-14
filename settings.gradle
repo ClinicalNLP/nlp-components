@@ -3,4 +3,5 @@ include 'component-groovy-dsl',
         'component-negation-detector',
 		'component-segmenter',
         'component-conceptmapper',
-		'component-sentence-detector'
+		'component-sentence-detector',
+		'component-tokenizer'

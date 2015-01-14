@@ -50,6 +50,7 @@ project(':') {
         compile project(':component-groovy-dsl')
         compile project(':component-negation-detector')
         compile project(':component-sentence-detector')
+		compile project(':component-tokenizer')
         compile project(':component-segmenter')
 		compile project(':component-conceptmapper')
     }
@@ -59,7 +60,9 @@ project(':component-groovy-dsl') {
 }
 
 project(':component-negation-detector') {
-    dependencies { compile project(':component-groovy-dsl') }
+    dependencies { 
+		compile project(':component-groovy-dsl') 
+	}
 }
 
 project(':component-segmenter') {
@@ -76,6 +79,17 @@ project(':component-sentence-detector') {
 	}
 }
 
+project(':component-tokenizer') {
+	dependencies {
+		compile project(':component-groovy-dsl')
+		compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.5.3'
+		compile group: 'org.apache.opennlp', name: 'opennlp-uima', version: '1.5.3'
+		compile group: 'org.apache.opennlp', name: 'opennlp-maxent', version: '3.0.3'
+	}
+}
+
 project(':component-conceptmapper') {
-	dependencies { compile project(':component-groovy-dsl') }
+	dependencies { 
+		compile project(':component-groovy-dsl') 
+	}
 }

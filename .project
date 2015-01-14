@@ -18,7 +18,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1420498370224</id>
+			<id>1421264341907</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -26,7 +26,15 @@
 				<arguments>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-component-negation</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-component-segmenter</arguments>
+					</matcher>
+					<matcher>
+						<id>org.eclipse.ui.ide.multiFilter</id>
+						<arguments>1.0-projectRelativePath-equals-true-false-component-tokenizer</arguments>
+					</matcher>
+					<matcher>
+						<id>org.eclipse.ui.ide.multiFilter</id>
+						<arguments>1.0-projectRelativePath-equals-true-false-component-negation-detector</arguments>
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
@@ -38,7 +46,7 @@
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-component-segment</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-component-sentence-detector</arguments>
 					</matcher>
 				</arguments>
 			</matcher>

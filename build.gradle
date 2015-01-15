@@ -53,6 +53,9 @@ project(':') {
 		compile project(':component-tokenizer')
         compile project(':component-segmenter')
 		compile project(':component-conceptmapper')
+		compile project(':component-relation-extractor')
+		
+		testCompile project(':component-brat-annotator')
     }
 }
 
@@ -91,5 +94,19 @@ project(':component-tokenizer') {
 project(':component-conceptmapper') {
 	dependencies { 
 		compile project(':component-groovy-dsl') 
+	}
+}
+
+project(':component-relation-extractor') {
+	dependencies {
+		compile project(':component-groovy-dsl')
+	}
+}
+
+project(':component-brat-annotator') {
+	dependencies {
+		compile project(':component-groovy-dsl')
+		compile project(':component-relation-extractor')
+		compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.5.3'
 	}
 }

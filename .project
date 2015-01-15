@@ -18,12 +18,16 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1421264341907</id>
+			<id>1421266724306</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.orFilterMatcher</id>
 				<arguments>
+					<matcher>
+						<id>org.eclipse.ui.ide.multiFilter</id>
+						<arguments>1.0-projectRelativePath-equals-true-false-component-brat-annotator</arguments>
+					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
 						<arguments>1.0-projectRelativePath-equals-true-false-component-segmenter</arguments>

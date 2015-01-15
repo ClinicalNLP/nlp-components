@@ -4,4 +4,6 @@ include 'component-groovy-dsl',
 		'component-segmenter',
         'component-conceptmapper',
 		'component-sentence-detector',
-		'component-tokenizer'
+		'component-tokenizer',
+		'component-brat-annotator',
+		'component-relation-extractor'

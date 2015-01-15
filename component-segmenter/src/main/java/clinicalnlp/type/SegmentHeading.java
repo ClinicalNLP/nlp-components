@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Fri Dec 12 23:55:03 CST 2014 */
+/* First created by JCasGen Wed Jan 14 21:49:28 CST 2015 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas; 
@@ -14,12 +14,12 @@ import org.apache.uima.jcas.tcas.Annotation;
  * Updated by JCasGen Wed Jan 14 21:49:32 CST 2015
  * XML source: C:/WKT/git/ClinicalNLP/nlp-components/component-segmenter/src/main/resources/descriptors/SegmentTypeSystem.xml
  * @generated */
-public class Segment extends Annotation {
+public class SegmentHeading extends Annotation {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(Segment.class);
+  public final static int typeIndexID = JCasRegistry.register(SegmentHeading.class);
   /** @generated
    * @ordered 
    */
@@ -33,14 +33,14 @@ public class Segment extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Segment() {/* intentionally empty block */}
+  protected SegmentHeading() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated
    * @param addr low level Feature Structure reference
    * @param type the type of this Feature Structure 
    */
-  public Segment(int addr, TOP_Type type) {
+  public SegmentHeading(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
@@ -48,7 +48,7 @@ public class Segment extends Annotation {
   /** @generated
    * @param jcas JCas to which this Feature Structure belongs 
    */
-  public Segment(JCas jcas) {
+  public SegmentHeading(JCas jcas) {
     super(jcas);
     readObject();   
   } 
@@ -58,7 +58,7 @@ public class Segment extends Annotation {
    * @param begin offset to the begin spot in the SofA
    * @param end offset to the end spot in the SofA 
   */  
-  public Segment(JCas jcas, int begin, int end) {
+  public SegmentHeading(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
@@ -84,18 +84,18 @@ public class Segment extends Annotation {
    * @return value of the feature 
    */
   public String getCode() {
-    if (Segment_Type.featOkTst && ((Segment_Type)jcasType).casFeat_code == null)
-      jcasType.jcas.throwFeatMissing("code", "clinicalnlp.type.Segment");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Segment_Type)jcasType).casFeatCode_code);}
+    if (SegmentHeading_Type.featOkTst && ((SegmentHeading_Type)jcasType).casFeat_code == null)
+      jcasType.jcas.throwFeatMissing("code", "clinicalnlp.type.SegmentHeading");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((SegmentHeading_Type)jcasType).casFeatCode_code);}
     
   /** setter for code - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setCode(String v) {
-    if (Segment_Type.featOkTst && ((Segment_Type)jcasType).casFeat_code == null)
-      jcasType.jcas.throwFeatMissing("code", "clinicalnlp.type.Segment");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Segment_Type)jcasType).casFeatCode_code, v);}    
+    if (SegmentHeading_Type.featOkTst && ((SegmentHeading_Type)jcasType).casFeat_code == null)
+      jcasType.jcas.throwFeatMissing("code", "clinicalnlp.type.SegmentHeading");
+    jcasType.ll_cas.ll_setStringValue(addr, ((SegmentHeading_Type)jcasType).casFeatCode_code, v);}    
    
     
   //*--------------*
@@ -106,18 +106,18 @@ public class Segment extends Annotation {
    * @return value of the feature 
    */
   public String getCodeSystem() {
-    if (Segment_Type.featOkTst && ((Segment_Type)jcasType).casFeat_codeSystem == null)
-      jcasType.jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Segment");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Segment_Type)jcasType).casFeatCode_codeSystem);}
+    if (SegmentHeading_Type.featOkTst && ((SegmentHeading_Type)jcasType).casFeat_codeSystem == null)
+      jcasType.jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.SegmentHeading");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((SegmentHeading_Type)jcasType).casFeatCode_codeSystem);}
     
   /** setter for codeSystem - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setCodeSystem(String v) {
-    if (Segment_Type.featOkTst && ((Segment_Type)jcasType).casFeat_codeSystem == null)
-      jcasType.jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Segment");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Segment_Type)jcasType).casFeatCode_codeSystem, v);}    
+    if (SegmentHeading_Type.featOkTst && ((SegmentHeading_Type)jcasType).casFeat_codeSystem == null)
+      jcasType.jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.SegmentHeading");
+    jcasType.ll_cas.ll_setStringValue(addr, ((SegmentHeading_Type)jcasType).casFeatCode_codeSystem, v);}    
   }
 
     

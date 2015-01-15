@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Fri Dec 12 23:55:03 CST 2014 */
+/* First created by JCasGen Wed Jan 14 21:49:28 CST 2015 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas;
@@ -16,7 +16,7 @@ import org.apache.uima.jcas.tcas.Annotation_Type;
 /** 
  * Updated by JCasGen Wed Jan 14 21:49:32 CST 2015
  * @generated */
-public class Segment_Type extends Annotation_Type {
+public class SegmentHeading_Type extends Annotation_Type {
   /** @generated 
    * @return the generator for this type
    */
@@ -26,25 +26,25 @@ public class Segment_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (Segment_Type.this.useExistingInstance) {
+  			 if (SegmentHeading_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = Segment_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = SegmentHeading_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new Segment(addr, Segment_Type.this);
-  			   Segment_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new SegmentHeading(addr, SegmentHeading_Type.this);
+  			   SegmentHeading_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new Segment(addr, Segment_Type.this);
+        } else return new SegmentHeading(addr, SegmentHeading_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = Segment.typeIndexID;
+  public final static int typeIndexID = SegmentHeading.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("clinicalnlp.type.Segment");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("clinicalnlp.type.SegmentHeading");
  
   /** @generated */
   final Feature casFeat_code;
@@ -56,7 +56,7 @@ public class Segment_Type extends Annotation_Type {
    */ 
   public String getCode(int addr) {
         if (featOkTst && casFeat_code == null)
-      jcas.throwFeatMissing("code", "clinicalnlp.type.Segment");
+      jcas.throwFeatMissing("code", "clinicalnlp.type.SegmentHeading");
     return ll_cas.ll_getStringValue(addr, casFeatCode_code);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class Segment_Type extends Annotation_Type {
    */    
   public void setCode(int addr, String v) {
         if (featOkTst && casFeat_code == null)
-      jcas.throwFeatMissing("code", "clinicalnlp.type.Segment");
+      jcas.throwFeatMissing("code", "clinicalnlp.type.SegmentHeading");
     ll_cas.ll_setStringValue(addr, casFeatCode_code, v);}
     
   
@@ -80,7 +80,7 @@ public class Segment_Type extends Annotation_Type {
    */ 
   public String getCodeSystem(int addr) {
         if (featOkTst && casFeat_codeSystem == null)
-      jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Segment");
+      jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.SegmentHeading");
     return ll_cas.ll_getStringValue(addr, casFeatCode_codeSystem);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class Segment_Type extends Annotation_Type {
    */    
   public void setCodeSystem(int addr, String v) {
         if (featOkTst && casFeat_codeSystem == null)
-      jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Segment");
+      jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.SegmentHeading");
     ll_cas.ll_setStringValue(addr, casFeatCode_codeSystem, v);}
     
   
@@ -101,7 +101,7 @@ public class Segment_Type extends Annotation_Type {
 	 * @param jcas JCas
 	 * @param casType Type 
 	 */
-  public Segment_Type(JCas jcas, Type casType) {
+  public SegmentHeading_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 

@@ -13,6 +13,7 @@ import org.apache.uima.fit.factory.AnalysisEngineFactory
 import org.apache.uima.fit.factory.ExternalResourceFactory
 import org.apache.uima.fit.factory.TypeSystemDescriptionFactory
 import org.apache.uima.jcas.JCas
+import org.apache.uima.resource.ExternalResourceDescription
 import org.apache.uima.resource.metadata.TypeSystemDescription
 import org.cleartk.token.type.Sentence
 import org.junit.After
@@ -62,11 +63,17 @@ class SentenceAnnotatorTest {
         //build type system description
         TypeSystemDescription tsd = TypeSystemDescriptionFactory.createTypeSystemDescription()
         tsd.resolveImports()
+		
+		// sentence model resource
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			opennlp.uima.sentdetect.SentenceModelResourceImpl, "file:models/sd-med-model.zip")
         
-        // create a sentence detector engine
+        // create a sentence detector description
         AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
                 SentenceDetector,
-                SentenceDetector.SD_MODEL_FILE_PARAM, 'models/sd-med-model.zip')
+                SentenceDetector.SENT_MODEL_KEY, extDesc)
+		
+		// create an engine
         AnalysisEngine engine = AnalysisEngineFactory.createEngine(desc)
         
         // load in the text to process
@@ -96,16 +103,21 @@ class SentenceAnnotatorTest {
         AnalysisEngineDescription segmenter = AnalysisEngineFactory.createEngineDescription(GroovyAnnotator,
                 tsd, GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/TestSegmenter.groovy')
         
-        // sentence detector
-        AnalysisEngineDescription sentDetectorDesc = AnalysisEngineFactory.createEngineDescription(
+		// sentence model resource
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			opennlp.uima.sentdetect.SentenceModelResourceImpl, "file:models/sd-med-model.zip")
+        
+        // create a sentence detector description
+        AnalysisEngineDescription sentDetector = AnalysisEngineFactory.createEngineDescription(
                 SentenceDetector,
-                SentenceDetector.SD_MODEL_FILE_PARAM, 'models/sd-med-model.zip')
+                SentenceDetector.SENT_MODEL_KEY, extDesc)
+		
         
         // build the aggregate analysis engine
         AggregateBuilder builder = new AggregateBuilder()
         builder.with {
             add(segmenter)
-            add(sentDetectorDesc)
+            add(sentDetector)
         }
         AnalysisEngine engine = builder.createAggregate()
         
@@ -135,17 +147,22 @@ class SentenceAnnotatorTest {
         AnalysisEngineDescription segmenter = AnalysisEngineFactory.createEngineDescription(GroovyAnnotator,
                 tsd, GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/TestSegmenter.groovy')
         
-        // sentence detector
-        AnalysisEngineDescription sentDetectorDesc = AnalysisEngineFactory.createEngineDescription(
-                SentenceDetector,
-                SentenceDetector.SD_SEGMENTS_TO_PARSE, 'groovy/TestSegmentsToParse.groovy',
-                SentenceDetector.SD_MODEL_FILE_PARAM, 'models/sd-med-model.zip')
+		// sentence model resource
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			opennlp.uima.sentdetect.SentenceModelResourceImpl, "file:models/sd-med-model.zip")
+		
+		// create a sentence detector description
+		AnalysisEngineDescription sentDetector = AnalysisEngineFactory.createEngineDescription(
+				SentenceDetector,
+				SentenceDetector.SD_SEGMENTS_TO_PARSE, 'groovy/TestSegmentsToParse.groovy',
+				SentenceDetector.SENT_MODEL_KEY, extDesc)
+		
         
         // build the aggregate analysis engine
         AggregateBuilder builder = new AggregateBuilder()
         builder.with {
             add(segmenter)
-            add(sentDetectorDesc)
+            add(sentDetector)
         }
         AnalysisEngine engine = builder.createAggregate()
         
@@ -174,18 +191,22 @@ class SentenceAnnotatorTest {
         // segmenter
         AnalysisEngineDescription segmenter = AnalysisEngineFactory.createEngineDescription(GroovyAnnotator,
                 tsd, GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/TestSegmenter.groovy')
-        
-        // sentence detector
-        AnalysisEngineDescription sentDetectorDesc = AnalysisEngineFactory.createEngineDescription(
-                SentenceDetector,
-                SentenceDetector.SD_SPLIT_PATTERN, ':',
-                SentenceDetector.SD_MODEL_FILE_PARAM, 'models/sd-med-model.zip')
+		
+		// sentence model resource
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			opennlp.uima.sentdetect.SentenceModelResourceImpl, "file:models/sd-med-model.zip")
+		
+		// create a sentence detector description
+		AnalysisEngineDescription sentDetector = AnalysisEngineFactory.createEngineDescription(
+				SentenceDetector,
+				SentenceDetector.SD_SPLIT_PATTERN, ':',
+				SentenceDetector.SENT_MODEL_KEY, extDesc)
         
         // build the aggregate analysis engine
         AggregateBuilder builder = new AggregateBuilder()
         builder.with {
             add(segmenter)
-            add(sentDetectorDesc)
+            add(sentDetector)
         }
         AnalysisEngine engine = builder.createAggregate()
         
@@ -215,17 +236,21 @@ class SentenceAnnotatorTest {
         AnalysisEngineDescription segmenter = AnalysisEngineFactory.createEngineDescription(GroovyAnnotator,
                 tsd, GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/SimpleSegmenter.groovy')
         
-        // sentence detector
-        AnalysisEngineDescription sentDetectorDesc = AnalysisEngineFactory.createEngineDescription(
-                SentenceDetector,
-                SentenceDetector.SD_SPLIT_PATTERN, '[\\n\\r:]+',
-                SentenceDetector.SD_MODEL_FILE_PARAM, 'models/sd-med-model.zip')
+		// sentence model resource
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			opennlp.uima.sentdetect.SentenceModelResourceImpl, "file:models/sd-med-model.zip")
+		
+		// create a sentence detector description
+		AnalysisEngineDescription sentDetector = AnalysisEngineFactory.createEngineDescription(
+				SentenceDetector,
+				SentenceDetector.SD_SPLIT_PATTERN, '[\\n\\r:]+',
+				SentenceDetector.SENT_MODEL_KEY, extDesc)
         
         // build the aggregate analysis engine
         AggregateBuilder builder = new AggregateBuilder()
         builder.with {
             add(segmenter)
-            add(sentDetectorDesc)
+            add(sentDetector)
         }
         AnalysisEngine engine = builder.createAggregate()
         
@@ -254,11 +279,15 @@ class SentenceAnnotatorTest {
         TypeSystemDescription tsd = TypeSystemDescriptionFactory.createTypeSystemDescription()
         tsd.resolveImports()
 
-        // sentence detector
-        AnalysisEngineDescription sentDetectorDesc = AnalysisEngineFactory.createEngineDescription(
-                SentenceDetector,
-                SentenceDetector.SD_SPLIT_PATTERN, '[\\r\\n:]+',
-                SentenceDetector.SD_MODEL_FILE_PARAM, 'models/sd-med-model.zip')
+		// sentence model resource
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			opennlp.uima.sentdetect.SentenceModelResourceImpl, "file:models/sd-med-model.zip")
+		
+		// create a sentence detector description
+		AnalysisEngineDescription sentDetector = AnalysisEngineFactory.createEngineDescription(
+				SentenceDetector,
+				SentenceDetector.SD_SPLIT_PATTERN, '[\\n\\r:]+',
+				SentenceDetector.SENT_MODEL_KEY, extDesc)
 
         // segmenter
         AnalysisEngineDescription segmenter = AnalysisEngineFactory.createEngineDescription(GroovyAnnotator,
@@ -268,7 +297,7 @@ class SentenceAnnotatorTest {
         AggregateBuilder builder = new AggregateBuilder()
         builder.with {
             add(segmenter)
-            add(sentDetectorDesc)
+            add(sentDetector)
         }
         AnalysisEngineDescription desc = builder.createAggregateDescription()
         PrintWriter writer = new PrintWriter(new File('src/test/resources/descriptors/SentenceDetector.xml'))

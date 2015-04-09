@@ -12,7 +12,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed Jan 14 16:54:02 CST 2015
+ * Updated by JCasGen Thu Apr 09 14:51:51 CDT 2015
  * XML source: C:/WKT/git/ClinicalNLP/nlp-components/component-relation-extractor/src/main/resources/descriptors/RelationTypeSystem.xml
  * @generated */
 public class Relation extends TOP {
@@ -88,25 +88,25 @@ public class Relation extends TOP {
    
     
   //*--------------*
-  //* Feature: codeSystem
+  //* Feature: system
 
-  /** getter for codeSystem - gets 
+  /** getter for system - gets 
    * @generated
    * @return value of the feature 
    */
-  public String getCodeSystem() {
-    if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_codeSystem == null)
-      jcasType.jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Relation");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Relation_Type)jcasType).casFeatCode_codeSystem);}
+  public String getSystem() {
+    if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_system == null)
+      jcasType.jcas.throwFeatMissing("system", "clinicalnlp.type.Relation");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Relation_Type)jcasType).casFeatCode_system);}
     
-  /** setter for codeSystem - sets  
+  /** setter for system - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setCodeSystem(String v) {
-    if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_codeSystem == null)
-      jcasType.jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Relation");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Relation_Type)jcasType).casFeatCode_codeSystem, v);}    
+  public void setSystem(String v) {
+    if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_system == null)
+      jcasType.jcas.throwFeatMissing("system", "clinicalnlp.type.Relation");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Relation_Type)jcasType).casFeatCode_system, v);}    
    
     
   //*--------------*

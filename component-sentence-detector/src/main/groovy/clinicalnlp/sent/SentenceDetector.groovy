@@ -9,12 +9,14 @@ import java.util.regex.Pattern
 import opennlp.tools.sentdetect.SentenceDetectorME
 import opennlp.tools.sentdetect.SentenceModel
 import opennlp.tools.util.Span
+import opennlp.uima.sentdetect.SentenceModelResource
 
 import org.apache.log4j.Level
 import org.apache.uima.UimaContext
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.descriptor.ConfigurationParameter
+import org.apache.uima.fit.descriptor.ExternalResource
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.tcas.Annotation
 import org.apache.uima.resource.ResourceInitializationException
@@ -34,20 +36,24 @@ import com.google.common.io.Resources
 @Log4j
 class SentenceDetector extends JCasAnnotator_ImplBase {
 
-    public static final String SD_MODEL_FILE_PARAM = 'sentenceModelFile'
+//    public static final String SD_MODEL_FILE_PARAM = 'sentenceModelFile'
     public static final String SD_SPLIT_PATTERN = 'splitPatternStr'
     public static final String SD_SEGMENTS_TO_PARSE = 'segmentsToParse'
 
-    @ConfigurationParameter(name = 'sentenceModelFile', mandatory = true, description = 'File holding sentence model')
-    private String sentenceModelFile;
+//    @ConfigurationParameter(name = 'sentenceModelFile', mandatory = true, description = 'File holding sentence model')
+//    private String sentenceModelFile;
 
     @ConfigurationParameter(name = 'segmentsToParse', mandatory = false, description = 'Script providing input segments')
     private String segmentsToParse;
 
     @ConfigurationParameter(name = 'splitPatternStr', mandatory = false, description = 'Characters to split on')
     private String splitPatternStr;
+	
+	public static final String SENT_MODEL_KEY = 'sent_model'
+	@ExternalResource(key = 'sent_model')
+	SentenceModelResource modelResource;
 
-    private SentenceModel model
+//    private SentenceModel model
     private SentenceDetectorME sentDetect
 
     private Pattern splitPattern
@@ -56,9 +62,9 @@ class SentenceDetector extends JCasAnnotator_ImplBase {
     public void initialize(UimaContext aContext) throws ResourceInitializationException {
         super.initialize(aContext)
         try {
-            InputStream modelIn = Resources.getResource(sentenceModelFile).openStream();
-            this.model = new SentenceModel(modelIn)
-            this.sentDetect = new SentenceDetectorME(this.model)
+//            InputStream modelIn = Resources.getResource(sentenceModelFile).openStream();
+//            this.model = new SentenceModel(modelIn)
+            this.sentDetect = new SentenceDetectorME(modelResource.getModel())
 
             if (this.splitPatternStr) {
                 this.splitPattern = Pattern.compile(this.splitPatternStr)

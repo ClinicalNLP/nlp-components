@@ -16,7 +16,7 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Jan 14 16:54:02 CST 2015
+ * Updated by JCasGen Thu Apr 09 14:51:51 CDT 2015
  * @generated */
 public class Relation_Type extends TOP_Type {
   /** @generated 
@@ -73,26 +73,26 @@ public class Relation_Type extends TOP_Type {
   
  
   /** @generated */
-  final Feature casFeat_codeSystem;
+  final Feature casFeat_system;
   /** @generated */
-  final int     casFeatCode_codeSystem;
+  final int     casFeatCode_system;
   /** @generated
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public String getCodeSystem(int addr) {
-        if (featOkTst && casFeat_codeSystem == null)
-      jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Relation");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_codeSystem);
+  public String getSystem(int addr) {
+        if (featOkTst && casFeat_system == null)
+      jcas.throwFeatMissing("system", "clinicalnlp.type.Relation");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_system);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setCodeSystem(int addr, String v) {
-        if (featOkTst && casFeat_codeSystem == null)
-      jcas.throwFeatMissing("codeSystem", "clinicalnlp.type.Relation");
-    ll_cas.ll_setStringValue(addr, casFeatCode_codeSystem, v);}
+  public void setSystem(int addr, String v) {
+        if (featOkTst && casFeat_system == null)
+      jcas.throwFeatMissing("system", "clinicalnlp.type.Relation");
+    ll_cas.ll_setStringValue(addr, casFeatCode_system, v);}
     
   
  
@@ -160,8 +160,8 @@ public class Relation_Type extends TOP_Type {
     casFeatCode_code  = (null == casFeat_code) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_code).getCode();
 
  
-    casFeat_codeSystem = jcas.getRequiredFeatureDE(casType, "codeSystem", "uima.cas.String", featOkTst);
-    casFeatCode_codeSystem  = (null == casFeat_codeSystem) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_codeSystem).getCode();
+    casFeat_system = jcas.getRequiredFeatureDE(casType, "system", "uima.cas.String", featOkTst);
+    casFeatCode_system  = (null == casFeat_system) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_system).getCode();
 
  
     casFeat_arg1 = jcas.getRequiredFeatureDE(casType, "arg1", "uima.tcas.Annotation", featOkTst);

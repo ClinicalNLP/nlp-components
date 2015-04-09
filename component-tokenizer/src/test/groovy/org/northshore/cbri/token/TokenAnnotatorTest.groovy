@@ -9,6 +9,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription
 import org.apache.uima.fit.factory.AnalysisEngineFactory
 import org.apache.uima.fit.factory.ExternalResourceFactory
 import org.apache.uima.jcas.JCas
+import org.apache.uima.resource.ExternalResourceDescription
 import org.cleartk.token.type.Sentence
 import org.cleartk.token.type.Token
 import org.junit.After
@@ -37,16 +38,16 @@ class TokenAnnotatorTest {
     
     @Test
     public void testTokenAnnotator() {
+		
+		ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
+			 opennlp.uima.tokenize.TokenizerModelResourceImpl.class, "file:models/en-token.bin")
+		
         AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
                 TokenAnnotator,
                 TokenAnnotator.PARAM_CONTAINER_TYPE,
                 'org.cleartk.token.type.Sentence',
-                TokenAnnotator.PARAM_POST_PROCESS_SCRIPT_FILE, 
-                "/groovy/TokenPostProcess.groovy")
-        ExternalResourceFactory.createDependencyAndBind(desc, 
-            TokenAnnotator.TOKEN_MODEL_KEY,
-            opennlp.uima.tokenize.TokenizerModelResourceImpl, 
-            "file:models/en-token.bin")
+				TokenAnnotator.TOKEN_MODEL_KEY, extDesc)
+		
         AnalysisEngine tokenizer = AnalysisEngineFactory.createEngine(desc)
         assert tokenizer != null
         

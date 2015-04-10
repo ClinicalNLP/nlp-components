@@ -36,11 +36,13 @@ class BratGoldAnnotator extends JCasAnnotator_ImplBase {
 		
 		UIMAUtil.jcas = jcas
 		
-		// load the BRAT document
+		// Load the BRAT document
 		BratDocument bratDoc = null;
+		// -- if the document was specified in parameter setting, then use that
 		if (annFileName != null) {
 			bratDoc = BratDocument.parseDocument(BratGoldAnnotator.getResourceAsStream(this.annFileName))
 		}
+		// -- else lookup URI from JCas
 		else {
 			File textFile = new File(ViewUriUtil.getURI(jcas));
 			String prefix = textFile.getPath().replaceAll('[.]txt$', '');
@@ -48,7 +50,7 @@ class BratGoldAnnotator extends JCasAnnotator_ImplBase {
 			bratDoc = BratDocument.parseDocument(new FileInputStream(annFile))
 		}
 		
-		// parse named entity mentions
+		// Parse named entity mentions
 		Map<String, Annotation> annMap = new HashMap<>()
 		bratDoc.getSpanAnnotations().each { key, value ->
 			mapSpanAnnotation(jcas, value).each { ann ->
@@ -56,7 +58,7 @@ class BratGoldAnnotator extends JCasAnnotator_ImplBase {
 			}
 		}
 		
-		// parse relations
+		// Parse relations
 		bratDoc.getRelAnnotations().values().each { value ->
 			NamedEntityMention arg1 = annMap.get(value.arg1)
 			NamedEntityMention arg2 = annMap.get(value.arg2)

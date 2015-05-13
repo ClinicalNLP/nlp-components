@@ -16,7 +16,7 @@ allprojects {
     repositories { mavenCentral() }
 
     dependencies {
-        compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.8'
+        compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.3'
 
         compile group: 'org.apache.uima', name: 'uimaj-core', version: '2.6.0'
         compile group: 'org.apache.uima', name: 'uimaj-document-annotation', version: '2.6.0'
@@ -56,7 +56,7 @@ project(':') {
         compile project(':component-sentence-detector')
 		compile project(':component-tokenizer')
         compile project(':component-segmenter')
-		compile project(':component-conceptmapper')
+		compile project(':component-dictionary')
 		compile project(':component-relation-extractor')
 		
 		testCompile project(':component-brat-annotator')
@@ -95,9 +95,9 @@ project(':component-tokenizer') {
 	}
 }
 
-project(':component-conceptmapper') {
+project(':component-dictionary') {
 	dependencies { 
-		compile project(':component-groovy-dsl') 
+		compile project(':component-tokenizer') 
 	}
 }
 

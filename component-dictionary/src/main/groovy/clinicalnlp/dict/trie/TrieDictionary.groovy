@@ -3,10 +3,23 @@ package clinicalnlp.dict.trie
 import clinicalnlp.dict.stringdist.DynamicStringDist
 
 class TrieDictionary<Value> {
-	private static class Node<Value> {
-		private Value value
-		private Map<Character, Node<Value>> next = new TreeMap<>()
+	private static class Node<Value> implements Comparable {
+		char c
+		Value value
+		@SuppressWarnings("rawtypes")
+		Node<Value>[] next = new Node<Value>[0]
+		
+		@Override
+		public int compareTo(Object other) {
+			if (other instanceof Node<Value>) {
+				return Integer.compare(c, ((Node<Value>)other).c)
+			}
+			else if (other instanceof Character) {
+				return Character.compare(c, (Character)other)
+			}
+		}
 	}
+	
 	
 	private static class SearchState<Value> {
 		Node<Value> node;
@@ -15,11 +28,11 @@ class TrieDictionary<Value> {
 	}
 	
 	public static class TokenMatch<Value> {
-		Integer[] tokenPositions;
+		Integer[] tokenIndices;
 		Value value;
 		
-		public TokenMatch(Integer[] tokenPositions, Value value) {
-			this.tokenPositions = tokenPositions
+		public TokenMatch(Integer[] tokenIndices, Value value) {
+			this.tokenIndices = tokenIndices
 			this.value = value
 		}
 	}
@@ -41,7 +54,8 @@ class TrieDictionary<Value> {
 	private Node<Value> getNode(Node<Value> node, CharSequence key, int index) {
 		if (index == key.length()) { return node }
 		char c = key.charAt(index)
-		return (node.next.containsKey(c) ? getNode(node.next[c], key, index+1) : null)
+		int idx = Arrays.binarySearch(node.next, c)
+		return (idx < 0 ? null : getNode(node.next[idx], key, index+1))
 	}
 	
 	/**
@@ -60,8 +74,17 @@ class TrieDictionary<Value> {
 			return node
 		}
 		char c = key.charAt(index)
-		if (!node.next.containsKey(c)) { node.next[c] = new Node<Value>() }
-		node.next[c] = putNode(node.next[c], key, value, index+1)
+		int idx = Arrays.binarySearch(node.next, c)
+		if (idx < 0) {
+			Node<Value>[] newNext = Arrays.copyOf(node.next, node.next.length+1)
+			newNext[node.next.length] = new Node<Value>(c:c, value:null)
+			Arrays.sort(newNext)
+			node.next = newNext
+			idx = Arrays.binarySearch(node.next, c)
+		}
+		
+//		if (!node.next.containsKey(c)) { node.next[c] = new Node<Value>() }
+		node.next[idx] = putNode(node.next[idx], key, value, index+1)
 		return node
 	}	
 

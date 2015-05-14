@@ -6,37 +6,44 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline
 import static org.junit.Assert.*
 
-import de.tudarmstadt.ukp.dkpro.core.io.text.*;
-
-import java.util.regex.Matcher
-
-import org.apache.uima.analysis_engine.AnalysisEngine
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase
-import org.apache.uima.fit.factory.AggregateBuilder
-import org.apache.uima.jcas.JCas
-import org.cleartk.token.type.Sentence
+import org.junit.Before
 import org.junit.Test
 
-import clinicalnlp.dsl.GroovyAnnotator
-import clinicalnlp.dsl.UIMAUtil
+import clinicalnlp.dict.stringdist.DynamicStringDist
+import clinicalnlp.dict.stringdist.MinEditDist
+import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
 class TestDictionary {
-
-    @Test
-    public void insertEntries() {
-		Map vocab = [
+	TrieDictionary dict;
+	Map entries;
+	
+	@Before
+	void setup() {
+		this.entries = [
 			'bee':'[BEE]',
 			'bees':'[BEES]'
 			]
 		
-		TrieDictionary dict = new TrieDictionary()
-		vocab.each { k,v ->
+		this.dict = new TrieDictionary()
+		this.entries.each { k,v ->
 			dict.put(k, v)
 		}
-		assert dict.numEntries == vocab.size()
-		vocab.each { k,v ->
+	}
+
+    @Test
+    public void smokeTest() {
+		assert dict.numEntries == entries.size()
+		entries.each { k,v ->
 			assert dict.get(k) == v
 		}
     }
+	
+	@Test
+	public void findMatches() {
+		Collection<CharSequence> tokens = new ArrayList<>()
+		tokens << 'bee' << 'bees' << 'beeswax'
+		
+		DynamicStringDist dist = new MinEditDist()
+		dict.findMatches(tokens, dist, 1.0)
+	}
 }

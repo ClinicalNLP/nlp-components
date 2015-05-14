@@ -2,7 +2,18 @@ package clinicalnlp.dict.trie
 
 import clinicalnlp.dict.stringdist.DynamicStringDist
 
+/**
+ * 
+ * @author Will Thompson
+ *
+ * @param <Value>
+ */
 class TrieDictionary<Value> {
+
+	// ------------------------------------------------------------------------
+	// Inner Classes
+	// ------------------------------------------------------------------------
+	
 	private static class Node<Value> implements Comparable {
 		char c
 		Value value
@@ -18,8 +29,7 @@ class TrieDictionary<Value> {
 				return Character.compare(c, (Character)other)
 			}
 		}
-	}
-	
+	}	
 	
 	private static class SearchState<Value> {
 		Node<Value> node;
@@ -36,10 +46,17 @@ class TrieDictionary<Value> {
 			this.value = value
 		}
 	}
-
 	
+	// ------------------------------------------------------------------------
+	// Fields
+	// ------------------------------------------------------------------------
+
 	Node<Value> root = new Node<>()
 	int numEntries = 0
+
+	// ------------------------------------------------------------------------
+	// Methods
+	// ------------------------------------------------------------------------
 
 	/**
 	 * 
@@ -82,8 +99,6 @@ class TrieDictionary<Value> {
 			node.next = newNext
 			idx = Arrays.binarySearch(node.next, c)
 		}
-		
-//		if (!node.next.containsKey(c)) { node.next[c] = new Node<Value>() }
 		node.next[idx] = putNode(node.next[idx], key, value, index+1)
 		return node
 	}	

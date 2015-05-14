@@ -7,6 +7,7 @@ class TrieDictionary<Value> {
 	}
 	
 	Node<Value> root = new Node<>()
+	int numEntries = 0
 
 	public Value get(CharSequence key) {
 		Node<Value> node = getNode(root, key, 0)
@@ -25,6 +26,7 @@ class TrieDictionary<Value> {
 			
 	private Node<Value> putNode(Node<Value> node, CharSequence key, Value value, int index) {
 		if (index == key.length()) {
+			if (node.value == null) { this.numEntries++ }
 			node.value = value
 			return node
 		}

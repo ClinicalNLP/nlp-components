@@ -34,6 +34,7 @@ class TestDictionary {
 		vocab.each { k,v ->
 			dict.put(k, v)
 		}
+		assert dict.numEntries == vocab.size()
 		vocab.each { k,v ->
 			assert dict.get(k) == v
 		}

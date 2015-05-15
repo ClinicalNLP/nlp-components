@@ -111,9 +111,4 @@ public class MinEditDist implements DynamicStringDist {
 		}
 		return matches
 	}
-
-	@Override
-	public Double getMinScore() {
-		return GroovyCollections.min(rows.peek()).score
-	}
 }

@@ -6,5 +6,4 @@ public interface DynamicStringDist {
 	public Double appendMatchChar(final char c);
 	public void removeMatchChar();
 	public Collection<Integer[]> getMatches(final Double score)
-	public Double getMinScore()
 }

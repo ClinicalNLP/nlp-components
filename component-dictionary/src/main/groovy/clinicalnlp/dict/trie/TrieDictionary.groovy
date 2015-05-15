@@ -138,10 +138,7 @@ class TrieDictionary<Value> {
 			SearchState<Value> ss = agenda.peek();
 			if (ss.index >= ss.node.next.length) { dist.removeMatchChar(); agenda.pop(); }
 			else {
-				// TODO: change this method to reject addtion if min score is less than tolerance
-				// TODO: remove the getMinScore() method
-				dist.appendMatchChar(ss.node.next[ss.index].c);
-				if (dist.getMinScore() > tolerance) {
+				if (dist.appendMatchChar(ss.node.next[ss.index].c) > tolerance) {
 					dist.removeMatchChar();
 				}
 				else {

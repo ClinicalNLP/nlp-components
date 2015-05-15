@@ -2,8 +2,8 @@ package clinicalnlp.dict.stringdist
 import java.util.Collection;
 
 public interface DynamicStringDist {
-	public void addTextToMatch(final Collection<CharSequence> tokens);
-	public Double appendMatchChar(final char c);
-	public void removeMatchChar();
-	public Collection<Integer[]> getMatches(final Double score)
+	public void init(final Collection<CharSequence> tokens);
+	public Double push(final char c);
+	public void pop();
+	public Collection<Integer[]> matches(final Double score)
 }

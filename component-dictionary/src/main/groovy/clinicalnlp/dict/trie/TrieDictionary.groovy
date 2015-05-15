@@ -38,21 +38,17 @@ class TrieDictionary<Value> {
 	}
 	
 	public static class TokenMatch<Value> {
-		Integer[] tokenIndices;
+		Integer startTokenIdx
+		Integer endTokenIdx
 		Value value;
-		
-		public TokenMatch(Integer[] tokenIndices, Value value) {
-			this.tokenIndices = tokenIndices
-			this.value = value
-		}
-		
+				
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder()
 			builder.append('match tokens: [')
-			builder.append(tokenIndices[0])
+			builder.append(startTokenIdx)
 			builder.append(', ')
-			builder.append(tokenIndices[1])
+			builder.append(endTokenIdx)
 			builder.append('] value:')
 			builder.append(value.toString())
 			return builder.toString()
@@ -76,8 +72,7 @@ class TrieDictionary<Value> {
 	 * @return
 	 */
 	public Value get(CharSequence key) {
-		Node<Value> node = getNode(root, key, 0)
-		return (node == null ? null : node.value)
+		return (getNode(root, key, 0))?.value
 	}
 	
 	private Node<Value> getNode(Node<Value> node, CharSequence key, int index) {
@@ -127,34 +122,42 @@ class TrieDictionary<Value> {
 		final DynamicStringDist dist,
 		final Double tolerance) {
 
-		// populate stringdist object with tokens
-		dist.addTextToMatch(tokens);
+		Collection<TokenMatch<Value>> matches = new ArrayList<>();
+		
+		// initialize string distance instance with tokens
+		dist.init(tokens);
 		
 		// traverse trie to find matches
-		Collection<TokenMatch<Value>> matches = new ArrayList<>();
 		Stack<SearchState<Value>> agenda = new Stack<>();
 		agenda.push(new SearchState<Value>(this.root));
 		while (!agenda.isEmpty()) {
-			SearchState<Value> ss = agenda.peek();
-			if (ss.index >= ss.node.next.length) { dist.removeMatchChar(); agenda.pop(); }
+			SearchState<Value> topSS = agenda.peek();
+		
+			// if the top search state is exhausted, pop it off the agenda
+			if (topSS.index >= topSS.node.next.length) { 
+				dist.pop(); agenda.pop(); 
+			}
+			// evaluate top search state
+			else if (dist.push(topSS.node.next[topSS.index].c) > tolerance) {
+				dist.pop();
+			}
+			// examine current search state and look for matches
 			else {
-				if (dist.appendMatchChar(ss.node.next[ss.index].c) > tolerance) {
-					dist.removeMatchChar();
-				}
-				else {
-					Node<Value> nextNode = ss.node.next[ss.index]
-					agenda.push(new SearchState<Value>(nextNode))
-					if (nextNode.value != null) {
-						Collection<Integer[]> strm = dist.getMatches(tolerance);
-						for (Integer[] tokenPos : strm) {
-							matches.add(new TokenMatch<Value>(tokenPos, nextNode.value));
-						}
+				Node<Value> nextNode = topSS.node.next[topSS.index]
+				agenda.push(new SearchState<Value>(nextNode))
+				if (nextNode.value != null) {
+					Collection<Integer[]> strm = dist.matches(tolerance);
+					for (Integer[] tokenIndices : strm) {
+						matches.add(new TokenMatch<Value>(startTokenIdx:tokenIndices[0], 
+							endTokenIdx:tokenIndices[1], value:nextNode.value));
 					}
 				}
 			}
-			ss.index++;
+			// advance index to next child state
+			topSS.index++;
 		}
-		// return matches
+
+		// return matches with scores inside tolerance
 		return matches;
 	}
 }

@@ -40,7 +40,7 @@ public class MinEditDist implements DynamicStringDist {
 	// ------------------------------------------------------------------------
 
 	@Override
-	public void addTextToMatch(final Collection<CharSequence> tokens) {
+	public void init(final Collection<CharSequence> tokens) {
 		if (tokens == null) { throw new NullPointerException() }
 		if (tokens.size() == 0) { throw new IllegalArgumentException("must have at least one token to match") }
 		
@@ -66,7 +66,7 @@ public class MinEditDist implements DynamicStringDist {
 	}
 	
 	@Override
-	public Double appendMatchChar(final char c) {
+	public Double push(final char c) {
 		dictEntryPrefix.append(c)
 		println ("Append: [${dictEntryPrefix}]")
 		BackPtr[] toprow = rows.peek()
@@ -89,7 +89,7 @@ public class MinEditDist implements DynamicStringDist {
 	}
 
 	@Override
-	public void removeMatchChar() {
+	public void pop() {
 		if (dictEntryPrefix.length() == 0) { return }
 		dictEntryPrefix.deleteCharAt(dictEntryPrefix.length()-1)
 		this.rows.pop()
@@ -97,7 +97,7 @@ public class MinEditDist implements DynamicStringDist {
 	}
 	
 	@Override
-	public Collection<Integer[]> getMatches(final Double tolerance) {
+	public Collection<Integer[]> matches(final Double tolerance) {
 		Collection<Integer[]> matches = new ArrayList<>()
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer endIndex ->

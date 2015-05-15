@@ -1,8 +1,7 @@
 package clinicalnlp.dict.stringdist
-import groovy.transform.Immutable
-import groovy.transform.ToString
+import groovy.util.logging.Log4j
 
-
+@Log4j
 public class MinEditDist implements DynamicStringDist {
 		
 	// ------------------------------------------------------------------------
@@ -44,6 +43,9 @@ public class MinEditDist implements DynamicStringDist {
 	// Methods
 	// ------------------------------------------------------------------------
 
+	/**
+	 * 
+	 */
 	@Override
 	public void init(final Collection<CharSequence> tokens) {
 		if (tokens == null) { throw new NullPointerException() }
@@ -57,7 +59,7 @@ public class MinEditDist implements DynamicStringDist {
 		}
 		this.text = builder.toString()
 		
-		println "Text added: [${this.text}]"
+		log.info "Text added: [${this.text}]"
 		
 		BackPtr[] bottomRow = new BackPtr[this.text.length()]
 		int score = 0
@@ -70,10 +72,13 @@ public class MinEditDist implements DynamicStringDist {
 		rows.push(bottomRow)
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public Double push(final char c) {
 		prefix.append(c)
-		println ("Append: [${prefix}]")
+		log.info "Append: [${prefix}]"
 		BackPtr[] toprow = rows.peek()
 		BackPtr[] newrow = new BackPtr[toprow.length]
 		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIdx:0)
@@ -85,29 +90,31 @@ public class MinEditDist implements DynamicStringDist {
 				]
 			newrow[i] = GroovyCollections.min(bptrs)
 		}
-		Double minScore = GroovyCollections.min(newrow).score
 		rows.push(newrow)
-		rows.each { BackPtr[] row ->
-			println row
-		}
-		return minScore
+		return GroovyCollections.min(newrow).score
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void pop() {
 		if (prefix.length() == 0) { return }
 		prefix.deleteCharAt(prefix.length()-1)
 		this.rows.pop()
-		println ("Remove: [${prefix}]")
+		log.info "Remove: [${prefix}]"
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public Collection<Integer[]> matches(final Double tolerance) {
 		Collection<Integer[]> matches = new ArrayList<>()
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer endIndex ->
 			if (bptr.score <= tolerance && text.charAt(endIndex+1) == TOKEN_SEP_CHAR) {
-				println "Match found: ${bptr.startIdx}, ${endIndex}; substring: ${text.subSequence(bptr.startIdx+1, endIndex+1)}"
+				log.info "Match found: ${bptr.startIdx}, ${endIndex}; substring: ${text.subSequence(bptr.startIdx+1, endIndex+1)}"
 				matches << ([
 					(text.charAt(bptr.startIdx) == TOKEN_SEP_CHAR ? this.str2tok[bptr.startIdx+1] : this.str2tok[bptr.startIdx]),
 					(text.charAt(endIndex) == TOKEN_SEP_CHAR ? this.str2tok[endIndex-1] : this.str2tok[endIndex]),

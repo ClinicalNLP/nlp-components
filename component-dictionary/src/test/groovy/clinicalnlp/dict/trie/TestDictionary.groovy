@@ -47,6 +47,6 @@ class TestDictionary {
 		DynamicStringDist dist = new MinEditDist()
 		Collection<TokenMatch> matches = dict.findMatches(tokens, dist, 0.0)
 		matches.each { println it }
-		////assert matches.size() == 2
+		assert matches.size() == 2
 	}
 }

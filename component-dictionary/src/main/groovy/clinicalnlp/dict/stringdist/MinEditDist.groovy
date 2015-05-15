@@ -18,7 +18,7 @@ public class MinEditDist implements DynamicStringDist {
 		
 		@Override
 		public String toString() {
-			return this.score.toString()
+			return (this.score.toString() + "(" + this.startRowIndex + ")")
 		}
 	}
 	
@@ -39,15 +39,9 @@ public class MinEditDist implements DynamicStringDist {
 		}
 		this.text = builder.toString()
 		
-//		StringJoiner joiner = new StringJoiner(TOKEN_SEP_CHAR)
-//		for (CharSequence token : tokens) {
-//			joiner.add(token)
-//		}
-//		this.text = joiner.toString()
-		println "Text added: '${this.text}'"
+		println "Text added: [${this.text}]"
 		
 		BackPtr[] bottomRow = new BackPtr[this.text.length()]
-//		bottomRow[0] = new BackPtr(score:0, startRowIndex:0)
 		int score = 0
 		for (int i = 0; i < text.size(); i++) {
 			if (text[i] == TOKEN_SEP_CHAR) { score = 0 }

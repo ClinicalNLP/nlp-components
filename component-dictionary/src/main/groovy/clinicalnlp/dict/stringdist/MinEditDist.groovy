@@ -36,7 +36,7 @@ public class MinEditDist implements DynamicStringDist {
 	static char TOKEN_SEP_CHAR = ' '
 	
 	CharSequence text
-	StringBuilder dictEntryPrefix = new StringBuilder()
+	StringBuilder prefix = new StringBuilder()
 	Stack<BackPtr[]> rows = new Stack<>()
 	Map<Integer, Integer> str2tok = new TreeMap<>()
 	
@@ -72,8 +72,8 @@ public class MinEditDist implements DynamicStringDist {
 	
 	@Override
 	public Double push(final char c) {
-		dictEntryPrefix.append(c)
-		println ("Append: [${dictEntryPrefix}]")
+		prefix.append(c)
+		println ("Append: [${prefix}]")
 		BackPtr[] toprow = rows.peek()
 		BackPtr[] newrow = new BackPtr[toprow.length]
 		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIdx:0)
@@ -95,10 +95,10 @@ public class MinEditDist implements DynamicStringDist {
 
 	@Override
 	public void pop() {
-		if (dictEntryPrefix.length() == 0) { return }
-		dictEntryPrefix.deleteCharAt(dictEntryPrefix.length()-1)
+		if (prefix.length() == 0) { return }
+		prefix.deleteCharAt(prefix.length()-1)
 		this.rows.pop()
-		println ("Remove: [${dictEntryPrefix}]")
+		println ("Remove: [${prefix}]")
 	}
 	
 	@Override

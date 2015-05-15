@@ -11,7 +11,7 @@ public class MinEditDist implements DynamicStringDist {
 
 	private static class BackPtr implements Comparable {
 		Double score
-		Integer startIndex
+		Integer startIdx
 		
 		@Override
 		public int compareTo(Object other) {
@@ -20,7 +20,12 @@ public class MinEditDist implements DynamicStringDist {
 		
 		@Override
 		public String toString() {
-			return (this.score.toString() + "(" + this.startIndex + ")")
+			StringBuilder builder = new StringBuilder()
+			builder.append(this.score.toString())
+			builder.append('(')
+			builder.append(this.startIdx)
+			builder.append(')')
+			return builder.toString()
 		}
 	}
 	
@@ -60,7 +65,7 @@ public class MinEditDist implements DynamicStringDist {
 		for (int i = 0; i < text.size(); i++) {
 			if (text[i] == TOKEN_SEP_CHAR) { score = 0; tokIdx++ }
 			else { this.str2tok[i] = tokIdx; }
-			bottomRow[i] = new BackPtr(startIndex:i, score:score++)
+			bottomRow[i] = new BackPtr(startIdx:i, score:score++)
 		}
 		rows.push(bottomRow)
 	}
@@ -71,12 +76,12 @@ public class MinEditDist implements DynamicStringDist {
 		println ("Append: [${dictEntryPrefix}]")
 		BackPtr[] toprow = rows.peek()
 		BackPtr[] newrow = new BackPtr[toprow.length]
-		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIndex:0)
+		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIdx:0)
 		for (int i = 1; i < newrow.length; i++) {
 			def bptrs = [
-				new BackPtr(startIndex:toprow[i-1].startIndex, score:(c == text.charAt(i) ? toprow[i-1].score : toprow[i-1].score + 1 )),
-				new BackPtr(startIndex:toprow[i].startIndex, score:(toprow[i].score + 1)),
-				new BackPtr(startIndex:newrow[i-1].startIndex, score:(newrow[i-1].score + 1))
+				new BackPtr(startIdx:toprow[i-1].startIdx, score:(c == text.charAt(i) ? toprow[i-1].score : toprow[i-1].score + 1 )),
+				new BackPtr(startIdx:toprow[i].startIdx, score:(toprow[i].score + 1)),
+				new BackPtr(startIdx:newrow[i-1].startIdx, score:(newrow[i-1].score + 1))
 				]
 			newrow[i] = GroovyCollections.min(bptrs)
 		}
@@ -102,9 +107,9 @@ public class MinEditDist implements DynamicStringDist {
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer endIndex ->
 			if (bptr.score <= tolerance && text.charAt(endIndex+1) == TOKEN_SEP_CHAR) {
-				println "Match found: ${bptr.startIndex}, ${endIndex}; substring: ${text.subSequence(bptr.startIndex+1, endIndex+1)}"
+				println "Match found: ${bptr.startIdx}, ${endIndex}; substring: ${text.subSequence(bptr.startIdx+1, endIndex+1)}"
 				matches << ([
-					(text.charAt(bptr.startIndex) == TOKEN_SEP_CHAR ? this.str2tok[bptr.startIndex+1] : this.str2tok[bptr.startIndex]),
+					(text.charAt(bptr.startIdx) == TOKEN_SEP_CHAR ? this.str2tok[bptr.startIdx+1] : this.str2tok[bptr.startIdx]),
 					(text.charAt(endIndex) == TOKEN_SEP_CHAR ? this.str2tok[endIndex-1] : this.str2tok[endIndex]),
 					] as Integer[])
 			}

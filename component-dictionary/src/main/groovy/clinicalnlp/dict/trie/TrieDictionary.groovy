@@ -49,7 +49,7 @@ class TrieDictionary<Value> {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder()
-			builder.append('tokens: [')
+			builder.append('match tokens: [')
 			builder.append(tokenIndices[0])
 			builder.append(', ')
 			builder.append(tokenIndices[1])

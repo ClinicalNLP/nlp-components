@@ -100,12 +100,12 @@ public class MinEditDist implements DynamicStringDist {
 	public Collection<Integer[]> getMatches(final Double tolerance) {
 		Collection<Integer[]> matches = new ArrayList<>()
 		BackPtr[] toprow = rows.peek()
-		toprow.eachWithIndex { BackPtr bptr, Integer idx ->
-			if (bptr.score <= tolerance && text.charAt(idx+1) == TOKEN_SEP_CHAR) {
-				println "Match found: ${bptr.startIndex}, ${idx}; substring: ${text.subSequence(bptr.startIndex+1, idx+1)}"
+		toprow.eachWithIndex { BackPtr bptr, Integer endIndex ->
+			if (bptr.score <= tolerance && text.charAt(endIndex+1) == TOKEN_SEP_CHAR) {
+				println "Match found: ${bptr.startIndex}, ${endIndex}; substring: ${text.subSequence(bptr.startIndex+1, endIndex+1)}"
 				matches << ([
 					(text.charAt(bptr.startIndex) == TOKEN_SEP_CHAR ? this.str2tok[bptr.startIndex+1] : this.str2tok[bptr.startIndex]),
-					(text.charAt(idx) == TOKEN_SEP_CHAR ? this.str2tok[idx-1] : this.str2tok[idx]),
+					(text.charAt(endIndex) == TOKEN_SEP_CHAR ? this.str2tok[endIndex-1] : this.str2tok[endIndex]),
 					] as Integer[])
 			}
 		}

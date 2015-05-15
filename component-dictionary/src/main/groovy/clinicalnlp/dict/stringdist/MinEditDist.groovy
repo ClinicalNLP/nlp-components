@@ -4,12 +4,14 @@ import groovy.transform.ToString
 
 
 public class MinEditDist implements DynamicStringDist {
-	
-	static String TOKEN_SEP_CHAR = ' '
-	
+		
+	// ------------------------------------------------------------------------
+	// Inner Classes
+	// ------------------------------------------------------------------------
+
 	private static class BackPtr implements Comparable {
 		Double score
-		Integer startRowIndex // bottom row index
+		Integer startIndex
 		
 		@Override
 		public int compareTo(Object other) {
@@ -18,18 +20,29 @@ public class MinEditDist implements DynamicStringDist {
 		
 		@Override
 		public String toString() {
-			return (this.score.toString() + "(" + this.startRowIndex + ")")
+			return (this.score.toString() + "(" + this.startIndex + ")")
 		}
 	}
 	
-	CharSequence text
-	StringBuilder match = new StringBuilder()
-	Stack<BackPtr[]> rows = new Stack<>()
+	// ------------------------------------------------------------------------
+	// Fields
+	// ------------------------------------------------------------------------
+
+	static char TOKEN_SEP_CHAR = ' '
 	
+	CharSequence text
+	StringBuilder dictEntryPrefix = new StringBuilder()
+	Stack<BackPtr[]> rows = new Stack<>()
+	Map<Integer, Integer> str2tok = new TreeMap<>()
+	
+	// ------------------------------------------------------------------------
+	// Methods
+	// ------------------------------------------------------------------------
+
 	@Override
 	public void addTextToMatch(final Collection<CharSequence> tokens) {
 		if (tokens == null) { throw new NullPointerException() }
-		if (tokens.size() == 0) { throw new IllegalArgumentException() }
+		if (tokens.size() == 0) { throw new IllegalArgumentException("must have at least one token to match") }
 		
 		StringBuilder builder = new StringBuilder()
 		builder.append(TOKEN_SEP_CHAR)
@@ -45,23 +58,23 @@ public class MinEditDist implements DynamicStringDist {
 		int score = 0
 		for (int i = 0; i < text.size(); i++) {
 			if (text[i] == TOKEN_SEP_CHAR) { score = 0 }
-			bottomRow[i] = new BackPtr(startRowIndex:i, score:score++)
+			bottomRow[i] = new BackPtr(startIndex:i, score:score++)
 		}
 		rows.push(bottomRow)
 	}
 	
 	@Override
 	public Double appendMatchChar(final char c) {
-		match.append(c)
-		println ("Append: [${match}]")
+		dictEntryPrefix.append(c)
+		println ("Append: [${dictEntryPrefix}]")
 		BackPtr[] toprow = rows.peek()
 		BackPtr[] newrow = new BackPtr[toprow.length]
-		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startRowIndex:0)
+		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIndex:0)
 		for (int i = 1; i < newrow.length; i++) {
 			def bptrs = [
-				new BackPtr(startRowIndex:toprow[i-1].startRowIndex, score:(c == text.charAt(i) ? toprow[i-1].score : toprow[i-1].score + 1 )),
-				new BackPtr(startRowIndex:toprow[i].startRowIndex, score:(toprow[i].score + 1)),
-				new BackPtr(startRowIndex:newrow[i-1].startRowIndex, score:(newrow[i-1].score + 1))
+				new BackPtr(startIndex:toprow[i-1].startIndex, score:(c == text.charAt(i) ? toprow[i-1].score : toprow[i-1].score + 1 )),
+				new BackPtr(startIndex:toprow[i].startIndex, score:(toprow[i].score + 1)),
+				new BackPtr(startIndex:newrow[i-1].startIndex, score:(newrow[i-1].score + 1))
 				]
 			newrow[i] = GroovyCollections.min(bptrs)
 		}
@@ -75,10 +88,10 @@ public class MinEditDist implements DynamicStringDist {
 
 	@Override
 	public void removeMatchChar() {
-		if (match.length() == 0) { return }
-		match.deleteCharAt(match.length()-1)
+		if (dictEntryPrefix.length() == 0) { return }
+		dictEntryPrefix.deleteCharAt(dictEntryPrefix.length()-1)
 		this.rows.pop()
-		println ("Remove: [${match}]")
+		println ("Remove: [${dictEntryPrefix}]")
 	}
 	
 	@Override
@@ -87,9 +100,9 @@ public class MinEditDist implements DynamicStringDist {
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer idx ->
 			if (bptr.score <= tolerance && text.charAt(idx+1) == TOKEN_SEP_CHAR) {
-				println "Match found: ${bptr.startRowIndex}, ${idx}; substring: ${text.subSequence(bptr.startRowIndex+1, idx+1)}"
+				println "Match found: ${bptr.startIndex}, ${idx}; substring: ${text.subSequence(bptr.startIndex+1, idx+1)}"
 				matches << ([
-					bptr.startRowIndex,
+					bptr.startIndex,
 					idx
 					] as Integer[])
 			}
@@ -101,5 +114,4 @@ public class MinEditDist implements DynamicStringDist {
 	public Double getMinScore() {
 		return GroovyCollections.min(rows.peek()).score
 	}
-
 }

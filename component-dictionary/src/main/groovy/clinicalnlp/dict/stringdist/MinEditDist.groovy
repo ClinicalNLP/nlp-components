@@ -5,9 +5,11 @@ import groovy.transform.ToString
 
 public class MinEditDist implements DynamicStringDist {
 	
+	static String TOKEN_SEP_CHAR = ' '
+	
 	private static class BackPtr implements Comparable {
-		Double score;
-		Integer startPos;
+		Double score
+		Integer startRowIndex // bottom row index
 		
 		@Override
 		public int compareTo(Object other) {
@@ -16,73 +18,66 @@ public class MinEditDist implements DynamicStringDist {
 		
 		@Override
 		public String toString() {
-			return this.score.toString();
+			return this.score.toString()
 		}
 	}
-		
-	CharSequence text;
+	
+	CharSequence text
 	StringBuilder match = new StringBuilder()
 	Stack<BackPtr[]> rows = new Stack<>()
-	Map<Integer, Integer> tokenPosMap = new TreeMap<>()
+	
+	@Override
+	public void addTextToMatch(final Collection<CharSequence> tokens) {
+		if (tokens == null) { throw new NullPointerException() }
+		if (tokens.size() == 0) { throw new IllegalArgumentException() }
+		
+		StringJoiner joiner = new StringJoiner(TOKEN_SEP_CHAR)
+		for (CharSequence token : tokens) {
+			joiner.add(token)
+		}
+		this.text = joiner.toString()
+		println "Text added: '${this.text}'"
+		
+		BackPtr[] bottomRow = new BackPtr[this.text.length()+1]
+		bottomRow[0] = new BackPtr(score:0, startRowIndex:0)
+		int strIndex = 1
+		for (int i = 0; i < text.size(); i++) {
+			if (text[i] == TOKEN_SEP_CHAR) { strIndex = 0 }
+			bottomRow[i+1] = new BackPtr(startRowIndex:i, score:strIndex++)
+		}
+		rows.push(bottomRow)
+	}
 	
 	@Override
 	public Double appendMatchChar(final char c) {
-		match.append(c);
+		match.append(c)
 		println ("Append: [${match}]")
 		BackPtr[] toprow = rows.peek()
 		BackPtr[] newrow = new BackPtr[toprow.size()]
-		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startPos:0)
+		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startRowIndex:0)
 		for (int i = 1; i < newrow.length; i++) {
 			def bptrs = [
-				new BackPtr(startPos:toprow[i-1].startPos, score:(c == text.charAt(i-1) ? toprow[i-1].score : toprow[i-1].score + 1 )),
-				new BackPtr(startPos:toprow[i].startPos, score:(toprow[i].score + 1)),
-				new BackPtr(startPos:toprow[i-1].startPos, score:(newrow[i-1].score + 1))
+				new BackPtr(startRowIndex:toprow[i-1].startRowIndex, score:(c == text.charAt(i-1) ? toprow[i-1].score : toprow[i-1].score + 1 )),
+				new BackPtr(startRowIndex:toprow[i].startRowIndex, score:(toprow[i].score + 1)),
+				new BackPtr(startRowIndex:toprow[i-1].startRowIndex, score:(newrow[i-1].score + 1))
 				]
 			newrow[i] = GroovyCollections.min(bptrs)
 		}
 		Double minScore = GroovyCollections.min(newrow).score
-		
 		rows.push(newrow)
-		
 		rows.each { BackPtr[] row ->
 			println row
 		}
-		
-		return 0.0;
+		return minScore
 	}
 
 	@Override
 	public void removeMatchChar() {
-		if (match.length() == 0) { return; }
+		if (match.length() == 0) { return }
 		match.deleteCharAt(match.length()-1)
 		assert this.rows.size() > 1
 		this.rows.pop()
 		println ("Remove: [${match}]")
-	}
-
-	@Override
-	public void addTextToMatch(final Collection<CharSequence> tokens) {
-		if (tokens == null) { throw new NullPointerException() }
-		if (tokens.size() == 0) { throw new IllegalArgumentException() }		
-		
-		StringJoiner joiner = new StringJoiner(' ');
-		for (CharSequence token : tokens) {
-			joiner.add(token);
-		}
-		this.text = joiner.toString()
-		println this.text
-		
-		BackPtr[] bottomRow = new BackPtr[this.text.length()+1]
-		bottomRow[0] = new BackPtr(score:0, startPos:0)
-		this.tokenPosMap[0] = 0
-		int strIndex = 1
-		int tokIndex = 0
-		for (int i = 0; i < text.size(); i++) {
-			if (text[i] == ' ') { strIndex = 0; tokIndex++ }
-			bottomRow[i+1] = new BackPtr(startPos:i, score:strIndex++)
-			this.tokenPosMap[i+1] = tokIndex
-		}
-		rows.push(bottomRow)
 	}
 	
 	@Override
@@ -90,11 +85,11 @@ public class MinEditDist implements DynamicStringDist {
 		Collection<Integer[]> matches = new ArrayList<>()
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer idx ->
-			if (bptr.score <= tolerance) {
-				println "Match found: ${bptr.startPos}, ${idx}"
+			if (bptr.score <= tolerance && (text.size() <= (idx+1) || text.charAt(idx+1) == TOKEN_SEP_CHAR)) {
+				println "Match found: ${bptr.startRowIndex}, ${idx}; substring: ${text.subSequence(bptr.startRowIndex, idx)}"
 				matches << ([
-					this.tokenPosMap[bptr.startPos],
-					this.tokenPosMap[idx]
+					bptr.startRowIndex,
+					idx
 					] as Integer[])
 			}
 		}

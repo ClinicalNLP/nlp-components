@@ -11,6 +11,7 @@ import org.junit.Test
 
 import clinicalnlp.dict.stringdist.DynamicStringDist
 import clinicalnlp.dict.stringdist.MinEditDist
+import clinicalnlp.dict.trie.TrieDictionary.TokenMatch
 import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
 class TestDictionary {
@@ -41,9 +42,11 @@ class TestDictionary {
 	@Test
 	public void findMatches() {
 		Collection<CharSequence> tokens = new ArrayList<>()
-		tokens << 'bee' << 'bees' << 'beeswax'
+		tokens << 'bee' << 'bees'
 		
 		DynamicStringDist dist = new MinEditDist()
-		dict.findMatches(tokens, dist, 1.0)
+		Collection<TokenMatch> matches = dict.findMatches(tokens, dist, 0.0)
+		matches.each { println it }
+		////assert matches.size() == 2
 	}
 }

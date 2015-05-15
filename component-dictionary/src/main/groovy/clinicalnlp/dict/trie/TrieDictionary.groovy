@@ -45,6 +45,18 @@ class TrieDictionary<Value> {
 			this.tokenIndices = tokenIndices
 			this.value = value
 		}
+		
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder()
+			builder.append('tokens: [')
+			builder.append(tokenIndices[0])
+			builder.append(', ')
+			builder.append(tokenIndices[1])
+			builder.append('] value:')
+			builder.append(value.toString())
+			return builder.toString()
+		}
 	}
 	
 	// ------------------------------------------------------------------------
@@ -114,36 +126,38 @@ class TrieDictionary<Value> {
 		final Collection<CharSequence> tokens,
 		final DynamicStringDist dist,
 		final Double tolerance) {
-		
-		Collection<TokenMatch<Value>> matches = new ArrayList<>();
-		
-		dist.addTextToMatch(tokens);
 
+		// populate stringdist object with tokens
+		dist.addTextToMatch(tokens);
+		
 		// traverse trie to find matches
+		Collection<TokenMatch<Value>> matches = new ArrayList<>();
 		Stack<SearchState<Value>> agenda = new Stack<>();
 		agenda.push(new SearchState<Value>(this.root));
 		while (!agenda.isEmpty()) {
 			SearchState<Value> ss = agenda.peek();
-			if (ss.index >= ss.node.next.size()) { dist.removeMatchChar(); agenda.pop(); }
+			if (ss.index >= ss.node.next.length) { dist.removeMatchChar(); agenda.pop(); }
 			else {
-//				dist.appendMatchChar();
-//				if (dist.getMinScore() > tolerance) {
-//					dist.removeMatchChar();
-//				}
-//				else {
-//					Node<Value> nextNode = ss.node.next[ss.c];
-//					agenda.push(new SearchState<Value>(nextNode));
-//					if (nextNode.val != null) {
-//						Collection<Integer[]> strm = dist.getMatches(tolerance);
-//						for (Integer[] tokenPos : strm) {
-//							matches.add(new TokenMatch<Value>(tokenPos, nextNode.val));
-//						}
-//					}
-//				}
+				// TODO: change this method to reject addtion if min score is less than tolerance
+				// TODO: remove the getMinScore() method
+				dist.appendMatchChar(ss.node.next[ss.index].c);
+				if (dist.getMinScore() > tolerance) {
+					dist.removeMatchChar();
+				}
+				else {
+					Node<Value> nextNode = ss.node.next[ss.index]
+					agenda.push(new SearchState<Value>(nextNode))
+					if (nextNode.value != null) {
+						Collection<Integer[]> strm = dist.getMatches(tolerance);
+						for (Integer[] tokenPos : strm) {
+							matches.add(new TokenMatch<Value>(tokenPos, nextNode.value));
+						}
+					}
+				}
 			}
-			ss.c++;
+			ss.index++;
 		}
-
+		// return matches
 		return matches;
 	}
 }

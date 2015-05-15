@@ -56,8 +56,10 @@ public class MinEditDist implements DynamicStringDist {
 		
 		BackPtr[] bottomRow = new BackPtr[this.text.length()]
 		int score = 0
+		int tokIdx = -1
 		for (int i = 0; i < text.size(); i++) {
-			if (text[i] == TOKEN_SEP_CHAR) { score = 0 }
+			if (text[i] == TOKEN_SEP_CHAR) { score = 0; tokIdx++ }
+			else { this.str2tok[i] = tokIdx; }
 			bottomRow[i] = new BackPtr(startIndex:i, score:score++)
 		}
 		rows.push(bottomRow)
@@ -102,8 +104,8 @@ public class MinEditDist implements DynamicStringDist {
 			if (bptr.score <= tolerance && text.charAt(idx+1) == TOKEN_SEP_CHAR) {
 				println "Match found: ${bptr.startIndex}, ${idx}; substring: ${text.subSequence(bptr.startIndex+1, idx+1)}"
 				matches << ([
-					bptr.startIndex,
-					idx
+					(text.charAt(bptr.startIndex) == TOKEN_SEP_CHAR ? this.str2tok[bptr.startIndex+1] : this.str2tok[bptr.startIndex]),
+					(text.charAt(idx) == TOKEN_SEP_CHAR ? this.str2tok[idx-1] : this.str2tok[idx]),
 					] as Integer[])
 			}
 		}

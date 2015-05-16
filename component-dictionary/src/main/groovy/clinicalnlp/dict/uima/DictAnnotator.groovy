@@ -11,7 +11,7 @@ class DictAnnotator extends JCasAnnotator_ImplBase {
 	@Override
 	public void initialize(UimaContext context)
 			throws ResourceInitializationException {
-		super.initialize(context);
+		super.initialize(context)
 	}
 
 	@Override

@@ -6,7 +6,7 @@
     <vendor/>
     <types>
     		<typeDescription>
-			<name>clinicalnlp.dict.uima.type.DictTerm</name>
+			<name>clinicalnlp.dict.uima.DictTerm</name>
 			<description>Annotation for dictionary lookup matches</description>
 			<supertypeName>uima.tcas.Annotation</supertypeName>
 			<features>

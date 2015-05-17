@@ -1,4 +1,4 @@
-package clinicalnlp.dict.trie;
+package clinicalnlp.dict;
 
 import static clinicalnlp.dsl.UIMAUtil.*
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
@@ -9,9 +9,7 @@ import static org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-import clinicalnlp.dict.DynamicStringDist;
-import clinicalnlp.dict.MinEditDist;
-import clinicalnlp.dict.trie.TrieDictionary.TokenMatch
+import clinicalnlp.dict.TrieDictionary.TokenMatch
 import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
 class TestDictionary {

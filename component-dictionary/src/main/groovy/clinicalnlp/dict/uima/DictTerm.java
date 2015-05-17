@@ -1,7 +1,7 @@
 
 
-/* First created by JCasGen Fri May 15 20:04:10 CDT 2015 */
-package clinicalnlp.dict.uima.type;
+/* First created by JCasGen Sun May 17 16:01:27 CDT 2015 */
+package clinicalnlp.dict.uima;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Annotation for dictionary lookup matches
- * Updated by JCasGen Fri May 15 20:04:10 CDT 2015
+ * Updated by JCasGen Sun May 17 16:01:27 CDT 2015
  * XML source: C:/WKT/git/ClinicalNLP/nlp-components/component-dictionary/src/main/resources/descriptors/DictTypes.xml
  * @generated */
 public class DictTerm extends Annotation {
@@ -85,7 +85,7 @@ public class DictTerm extends Annotation {
    */
   public String getCanonicalTerm() {
     if (DictTerm_Type.featOkTst && ((DictTerm_Type)jcasType).casFeat_canonicalTerm == null)
-      jcasType.jcas.throwFeatMissing("canonicalTerm", "clinicalnlp.dict.uima.type.DictTerm");
+      jcasType.jcas.throwFeatMissing("canonicalTerm", "clinicalnlp.dict.uima.DictTerm");
     return jcasType.ll_cas.ll_getStringValue(addr, ((DictTerm_Type)jcasType).casFeatCode_canonicalTerm);}
     
   /** setter for canonicalTerm - sets canonical form 
@@ -94,7 +94,7 @@ public class DictTerm extends Annotation {
    */
   public void setCanonicalTerm(String v) {
     if (DictTerm_Type.featOkTst && ((DictTerm_Type)jcasType).casFeat_canonicalTerm == null)
-      jcasType.jcas.throwFeatMissing("canonicalTerm", "clinicalnlp.dict.uima.type.DictTerm");
+      jcasType.jcas.throwFeatMissing("canonicalTerm", "clinicalnlp.dict.uima.DictTerm");
     jcasType.ll_cas.ll_setStringValue(addr, ((DictTerm_Type)jcasType).casFeatCode_canonicalTerm, v);}    
    
     
@@ -108,7 +108,7 @@ public class DictTerm extends Annotation {
    */
   public Annotation getEnclosingSpan() {
     if (DictTerm_Type.featOkTst && ((DictTerm_Type)jcasType).casFeat_enclosingSpan == null)
-      jcasType.jcas.throwFeatMissing("enclosingSpan", "clinicalnlp.dict.uima.type.DictTerm");
+      jcasType.jcas.throwFeatMissing("enclosingSpan", "clinicalnlp.dict.uima.DictTerm");
     return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((DictTerm_Type)jcasType).casFeatCode_enclosingSpan)));}
     
   /** setter for enclosingSpan - sets span that this NoTerm is contained within (i.e. its
@@ -118,7 +118,7 @@ public class DictTerm extends Annotation {
    */
   public void setEnclosingSpan(Annotation v) {
     if (DictTerm_Type.featOkTst && ((DictTerm_Type)jcasType).casFeat_enclosingSpan == null)
-      jcasType.jcas.throwFeatMissing("enclosingSpan", "clinicalnlp.dict.uima.type.DictTerm");
+      jcasType.jcas.throwFeatMissing("enclosingSpan", "clinicalnlp.dict.uima.DictTerm");
     jcasType.ll_cas.ll_setRefValue(addr, ((DictTerm_Type)jcasType).casFeatCode_enclosingSpan, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 

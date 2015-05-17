@@ -1,4 +1,4 @@
-package clinicalnlp.dict.stringdist;
+package clinicalnlp.dict;
 
 import static org.junit.Assert.*;
 

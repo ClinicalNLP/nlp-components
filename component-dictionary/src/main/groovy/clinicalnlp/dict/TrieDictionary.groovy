@@ -1,6 +1,5 @@
-package clinicalnlp.dict.trie
+package clinicalnlp.dict
 
-import clinicalnlp.dict.DynamicStringDist;
 
 /**
  * 

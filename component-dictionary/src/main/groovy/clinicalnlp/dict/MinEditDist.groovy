@@ -1,4 +1,4 @@
-package clinicalnlp.dict.stringdist
+package clinicalnlp.dict
 import groovy.util.logging.Log4j
 
 @Log4j

@@ -9,8 +9,8 @@ import static org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-import clinicalnlp.dict.stringdist.DynamicStringDist
-import clinicalnlp.dict.stringdist.MinEditDist
+import clinicalnlp.dict.DynamicStringDist;
+import clinicalnlp.dict.MinEditDist;
 import clinicalnlp.dict.trie.TrieDictionary.TokenMatch
 import de.tudarmstadt.ukp.dkpro.core.io.text.*
 

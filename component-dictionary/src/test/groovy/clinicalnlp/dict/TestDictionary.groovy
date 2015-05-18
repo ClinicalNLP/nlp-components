@@ -57,11 +57,11 @@ class TestDictionary {
 		
 		DynamicStringDist dist = new MinEditDist()
 		Collection<TokenMatch> matches = dict.findMatches(tokens, dist, 0.0)
-		matches.each { println it }
+		matches.each { log.info it }
 		assert matches.size() == 2
 		
 		matches = dict.findMatches(tokens, dist, 1.0)
-		matches.each { println it }
+		matches.each { log.info it }
 		assert matches.size() == 4
 	}
 }

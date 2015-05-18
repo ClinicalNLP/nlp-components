@@ -59,7 +59,7 @@ public class MinEditDist implements DynamicStringDist {
 		}
 		this.text = builder.toString()
 		
-		log.info "Text added: [${this.text}]"
+		log.info "Initialized with text: [${this.text}]"
 		
 		BackPtr[] bottomRow = new BackPtr[this.text.length()]
 		int score = 0
@@ -78,7 +78,7 @@ public class MinEditDist implements DynamicStringDist {
 	@Override
 	public Double push(final char c) {
 		prefix.append(c)
-		log.info "Append: [${prefix}]"
+		log.info "Pushed: [${prefix}]"
 		BackPtr[] toprow = rows.peek()
 		BackPtr[] newrow = new BackPtr[toprow.length]
 		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIdx:0)
@@ -102,7 +102,7 @@ public class MinEditDist implements DynamicStringDist {
 		if (prefix.length() == 0) { return }
 		prefix.deleteCharAt(prefix.length()-1)
 		this.rows.pop()
-		log.info "Remove: [${prefix}]"
+		log.info "Popped: [${prefix}]"
 	}
 	
 	/**

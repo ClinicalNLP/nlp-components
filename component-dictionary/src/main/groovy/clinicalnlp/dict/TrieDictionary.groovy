@@ -1,8 +1,9 @@
 package clinicalnlp.dict
 
 import groovy.transform.EqualsAndHashCode;
-import groovy.transform.Immutable
-import groovy.transform.ToString;
+
+import java.util.Collection;
+import java.util.Set;
 
 
 /**

@@ -18,8 +18,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
 @Log4j
 class TestDictionary {
-	TrieDictionary dict;
-	Map entries;
+	TrieDictionary<DictEntry> dict;
+	Map<String, DictEntry> entries;
 	
 	@BeforeClass
 	static void setupClass() {
@@ -31,12 +31,11 @@ class TestDictionary {
 	void setup() {
 		log.setLevel(Level.INFO)
 		
+		this.dict = new TrieDictionary<DictEntry>()		
 		this.entries = [
-			'bee':'[BEE]',
-			'bees':'[BEES]'
-			]
-		
-		this.dict = new TrieDictionary()
+			'bee':(new DictEntry(vocab:'V1', code:'C1', canonical:'bee')),
+			'bees':(new DictEntry(vocab:'V1', code:'C2', canonical:'bees'))
+			]		
 		this.entries.each { k,v ->
 			dict.put(k, v)
 		}

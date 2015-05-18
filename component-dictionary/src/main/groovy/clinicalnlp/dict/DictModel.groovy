@@ -2,13 +2,13 @@ package clinicalnlp.dict;
 
 import java.util.Set;
 
-public interface DictModel {
+public interface DictModel<Value> {
 	
-	public DictEntry get (String[] tokens);
+	public Value get (final String[] tokens);
 	
-	public void add (final DictEntry entry);
+	public void put (final String[] tokens, final Value entry);
 	
-	public Set<LookupMatch> findMatches (final String[] tokens);
+	public Set<TokenMatch> matches (final String[] tokens);
 	
-	public Set<LookupMatch> findMatches (final String[] tokens, Double tolerance);
+	public Set<TokenMatch> matches (final String[] tokens, Double tolerance);
 }

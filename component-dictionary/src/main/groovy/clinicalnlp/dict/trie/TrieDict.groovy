@@ -1,11 +1,8 @@
 package clinicalnlp.dict.trie
 
-import groovy.transform.EqualsAndHashCode;
-
-import java.util.Collection;
-import java.util.Set;
-
-import clinicalnlp.dict.stringdist.DynamicStringDist;
+import clinicalnlp.dict.DictTokenSerializer
+import clinicalnlp.dict.TokenMatch
+import clinicalnlp.dict.stringdist.DynamicStringDist
 
 
 /**
@@ -29,7 +26,7 @@ class TrieDict<Value> {
 		@Override
 		public int compareTo(Object other) {
 			if (other instanceof Node<Value>) {
-				return Integer.compare(c, ((Node<Value>)other).c)
+				return Character.compare(c, ((Node<Value>)other).c)
 			}
 			else if (other instanceof Character) {
 				return Character.compare(c, (Character)other)
@@ -41,25 +38,6 @@ class TrieDict<Value> {
 		Node<Value> node;
 		int index = 0;
 		SearchState(Node<Value> node) { this.node = node }
-	}
-	
-	@EqualsAndHashCode
-	public static class TokenMatch<Value> {
-		Integer startTokenIdx
-		Integer endTokenIdx
-		Value value;
-				
-		@Override
-		public String toString() {
-			StringBuilder builder = new StringBuilder()
-			builder.append('match tokens: [')
-			builder.append(startTokenIdx)
-			builder.append(', ')
-			builder.append(endTokenIdx)
-			builder.append('] value:')
-			builder.append(value.toString())
-			return builder.toString()
-		}
 	}
 	
 	// ------------------------------------------------------------------------
@@ -78,8 +56,8 @@ class TrieDict<Value> {
 	 * @param key
 	 * @return
 	 */
-	public Value get(CharSequence key) {
-		return (getNode(root, key, 0))?.value
+	public Value get(Collection<CharSequence> keyTokens) {
+		return (getNode(root, DictTokenSerializer.serialize(keyTokens), 0))?.value
 	}
 	
 	private Node<Value> getNode(Node<Value> node, CharSequence key, int index) {
@@ -94,8 +72,8 @@ class TrieDict<Value> {
 	 * @param key
 	 * @param value
 	 */
-	public void put(CharSequence key, Value value) {
-		root = putNode(root, key, value, 0)
+	public void put(final Collection<CharSequence> keyTokens, final Value value) {
+		root = putNode(root, DictTokenSerializer.serialize(keyTokens), value, 0)
 	}
 			
 	private Node<Value> putNode(Node<Value> node, CharSequence key, Value value, int index) {
@@ -124,7 +102,7 @@ class TrieDict<Value> {
 	 * @param tolerance
 	 * @return
 	 */
-	public Set<TokenMatch<Value>> findMatches(
+	public Set<TokenMatch<Value>> matches(
 		final Collection<CharSequence> tokens,
 		final DynamicStringDist dist,
 		final Double tolerance) {
@@ -167,4 +145,5 @@ class TrieDict<Value> {
 		// return matches with scores inside tolerance
 		return matches;
 	}
+
 }

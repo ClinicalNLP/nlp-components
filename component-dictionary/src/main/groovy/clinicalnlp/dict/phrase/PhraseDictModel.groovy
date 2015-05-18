@@ -4,16 +4,15 @@ import groovy.util.logging.Log4j
 import opennlp.tools.tokenize.SimpleTokenizer
 import opennlp.uima.tokenize.Tokenizer
 import clinicalnlp.dict.DictEntry
-import clinicalnlp.dict.DictModel
-import clinicalnlp.dict.LookupMatch
+import clinicalnlp.dict.TokenMatch
 
 import com.wcohen.ss.JaroWinkler
 import com.wcohen.ss.SoftTFIDF
 
 @Log4j
-public class PhraseDictModel implements DictModel {
+public class PhraseDictModel<Value> {
 		
-	private Map<String[], DictEntry> entries = new HashMap<>()
+	private Map<String[], Value> entries = new HashMap<>()
 	private PhraseTree phrases = new PhraseTree()
 	
 	private Boolean caseInsensitive;
@@ -22,12 +21,12 @@ public class PhraseDictModel implements DictModel {
 		this.caseInsensitive = caseInsensitive;
 	}
 	
-	@Override
+//	@Override
 	public DictEntry get(String[] tokens) {
 		return this.entries.get(this.join(tokens))
 	}
 
-	@Override
+//	@Override
 	public void add(final DictEntry entry) {
 		this.phrases.addPhrase(this.transformArray(entry.canonical))
 		this.entries.put(this.join(entry.canonical), entry)
@@ -37,9 +36,9 @@ public class PhraseDictModel implements DictModel {
 		}
 	}
 		
-	@Override
-	public Set<LookupMatch> findMatches(final String[] tokens) {
-		Set<LookupMatch> matches = new HashSet<>()
+//	@Override
+	public Set<TokenMatch> findMatches(final String[] tokens) {
+		Set<TokenMatch> matches = new HashSet<>()
 		
 		for (int i = 0; i < tokens.length; i++) {
 			String[] tokensToEnd = tokens[i, tokens.length - 1]
@@ -47,7 +46,7 @@ public class PhraseDictModel implements DictModel {
 			Integer endMatchPosition = phrases.getLongestMatch(tokensToEnd)
 			if (endMatchPosition != null) {
 				String[] matchedTokens = Arrays.copyOfRange(tokensToEnd, 0, endMatchPosition)
-				matches << new LookupMatch(
+				matches << new TokenMatch(
 					begin:i,
 					end:(i+endMatchPosition),
 					entry:entries.get(this.join(matchedTokens))
@@ -58,9 +57,9 @@ public class PhraseDictModel implements DictModel {
 		return matches;
 	}
 	
-	@Override
-	public Set<LookupMatch> findMatches(String[] tokens, Double tolerance) {
-		Set<LookupMatch> matches = new HashSet<>()
+//	@Override
+	public Set<TokenMatch> findMatches(String[] tokens, Double tolerance) {
+		Set<TokenMatch> matches = new HashSet<>()
 		
 		Tokenizer tokenizer = new SimpleTokenizer(false,true);
 		SoftTFIDF distance = new SoftTFIDF(tokenizer, new JaroWinkler(), tolerance);

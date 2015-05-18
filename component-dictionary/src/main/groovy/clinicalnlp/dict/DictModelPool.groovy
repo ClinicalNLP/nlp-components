@@ -1,6 +1,5 @@
 package clinicalnlp.dict
 
-
 class DictModelPool {
 	private static Map<Integer, DictModel> dicts;
 	

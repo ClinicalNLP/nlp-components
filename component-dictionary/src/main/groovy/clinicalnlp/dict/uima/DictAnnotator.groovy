@@ -14,7 +14,7 @@ import org.apache.uima.resource.ResourceInitializationException
 
 import clinicalnlp.dict.DictModel;
 import clinicalnlp.dict.DictModelPool;
-import clinicalnlp.dict.LookupMatch;
+import clinicalnlp.dict.TokenMatch;
 
 @Log4j
 public class DictAnnotator extends JCasAnnotator_ImplBase {
@@ -72,8 +72,8 @@ public class DictAnnotator extends JCasAnnotator_ImplBase {
 			anns.each { Annotation ann ->
 				tokens << ann.coveredText
 			}
-			Collection<LookupMatch> matches = dict.findMatches(tokens as String[])
-			matches.each { LookupMatch m ->
+			Collection<TokenMatch> matches = dict.findMatches(tokens as String[])
+			matches.each { TokenMatch m ->
 				Collection<Annotation> matched = new ArrayList<>()
 				for (int i = m.begin; i < m.end; i++) {
 					matched << anns.get(i)

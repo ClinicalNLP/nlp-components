@@ -14,15 +14,15 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import clinicalnlp.dict.DictEntry
+import clinicalnlp.dict.TokenMatch
 import clinicalnlp.dict.stringdist.DynamicStringDist
 import clinicalnlp.dict.stringdist.MinEditDist
-import clinicalnlp.dict.trie.TrieDict.TokenMatch
 import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
 @Log4j
 class TestTrieDict {
 	TrieDict<DictEntry> dict;
-	Map<String, DictEntry> entries;
+	Map<Collection<CharSequence>, DictEntry> entries;
 	
 	@BeforeClass
 	static void setupClass() {
@@ -36,10 +36,10 @@ class TestTrieDict {
 		
 		this.dict = new TrieDict<DictEntry>()		
 		this.entries = [
-			'bee':(new DictEntry(vocab:'V1', code:'C1', canonical:'bee')),
-			'bees':(new DictEntry(vocab:'V1', code:'C2', canonical:'bees'))
+			['bee']:(new DictEntry(vocab:'V1', code:'C1', canonical:'bee')),
+			['bees']:(new DictEntry(vocab:'V1', code:'C2', canonical:'bees'))
 			]		
-		this.entries.each { k,v ->
+		this.entries.each { Collection<CharSequence> k, DictEntry v ->
 			dict.put(k, v)
 		}
 	}
@@ -58,11 +58,11 @@ class TestTrieDict {
 		tokens << 'bee' << 'bees'
 		
 		DynamicStringDist dist = new MinEditDist()
-		Collection<TokenMatch> matches = dict.findMatches(tokens, dist, 0.0)
+		Set<TokenMatch> matches = this.dict.matches(tokens, dist, 0.0)
 		matches.each { log.info it }
 		assert matches.size() == 2
 		
-		matches = dict.findMatches(tokens, dist, 1.0)
+		matches = this.dict.matches(tokens, dist, 1.0)
 		matches.each { log.info it }
 		assert matches.size() == 4
 	}

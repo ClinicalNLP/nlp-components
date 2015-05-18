@@ -1,6 +1,5 @@
 package clinicalnlp.dict
 
-import groovy.transform.Immutable
 import groovy.transform.ToString
 
 @ToString

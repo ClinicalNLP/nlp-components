@@ -1,14 +1,16 @@
 package clinicalnlp.dict;
 
-import java.util.Set;
+import clinicalnlp.dict.stringdist.DynamicStringDist
+import java.util.Set
+import java.util.Collection
 
 public interface DictModel<Value> {
 	
-	public Value get (final String[] tokens);
+	public Value get (final Collection<CharSequence> tokens);
 	
-	public void put (final String[] tokens, final Value entry);
+	public void put (final Collection<CharSequence> tokens, final Value entry);
 	
-	public Set<TokenMatch> matches (final String[] tokens);
+	public Set<TokenMatch> matches (final Collection<CharSequence> tokens);
 	
-	public Set<TokenMatch> matches (final String[] tokens, Double tolerance);
+	public Set<TokenMatch> matches (final Collection<CharSequence> tokens, final DynamicStringDist dist, final Double tolerance);
 }

@@ -1,5 +1,7 @@
 package clinicalnlp.dict.trie
 
+import clinicalnlp.dict.DictEntry
+import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.DictTokenSerializer
 import clinicalnlp.dict.TokenMatch
 import clinicalnlp.dict.stringdist.DynamicStringDist
@@ -11,7 +13,7 @@ import clinicalnlp.dict.stringdist.DynamicStringDist
  *
  * @param <Value>
  */
-class TrieDict<Value> {
+class TrieDict<Value> implements DictModel<Value> {
 
 	// ------------------------------------------------------------------------
 	// Inner Classes
@@ -51,13 +53,9 @@ class TrieDict<Value> {
 	// Methods
 	// ------------------------------------------------------------------------
 
-	/**
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public Value get(Collection<CharSequence> keyTokens) {
-		return (getNode(root, DictTokenSerializer.serialize(keyTokens), 0))?.value
+	@Override	
+	public Value get (final Collection<CharSequence> tokens) {
+		return (getNode(root, DictTokenSerializer.serialize(tokens), 0))?.value
 	}
 	
 	private Node<Value> getNode(Node<Value> node, CharSequence key, int index) {
@@ -67,11 +65,7 @@ class TrieDict<Value> {
 		return (idx < 0 ? null : getNode(node.next[idx], key, index+1))
 	}
 	
-	/**
-	 * 
-	 * @param key
-	 * @param value
-	 */
+	@Override
 	public void put(final Collection<CharSequence> keyTokens, final Value value) {
 		root = putNode(root, DictTokenSerializer.serialize(keyTokens), value, 0)
 	}
@@ -93,17 +87,15 @@ class TrieDict<Value> {
 		}
 		node.next[idx] = putNode(node.next[idx], key, value, index+1)
 		return node
-	}	
+	}
+	
+	@Override
+	public Set<TokenMatch> matches(final Collection<CharSequence> tokens) {
+		return null;
+	}
 
-	/**
-	 * 
-	 * @param tokens
-	 * @param dist
-	 * @param tolerance
-	 * @return
-	 */
-	public Set<TokenMatch<Value>> matches(
-		final Collection<CharSequence> tokens,
+	@Override
+	public Set<TokenMatch<Value>> matches(final Collection<CharSequence> tokens,
 		final DynamicStringDist dist,
 		final Double tolerance) {
 
@@ -145,5 +137,4 @@ class TrieDict<Value> {
 		// return matches with scores inside tolerance
 		return matches;
 	}
-
 }

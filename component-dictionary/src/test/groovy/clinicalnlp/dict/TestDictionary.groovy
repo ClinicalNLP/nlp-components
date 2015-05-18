@@ -5,19 +5,32 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline
 import static org.junit.Assert.*
+import groovy.util.logging.Log4j
 
+import org.apache.log4j.BasicConfigurator
+import org.apache.log4j.Level
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 
 import clinicalnlp.dict.TrieDictionary.TokenMatch
 import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
+@Log4j
 class TestDictionary {
 	TrieDictionary dict;
 	Map entries;
 	
+	@BeforeClass
+	static void setupClass() {
+		BasicConfigurator.configure()
+	}
+
+	
 	@Before
 	void setup() {
+		log.setLevel(Level.INFO)
+		
 		this.entries = [
 			'bee':'[BEE]',
 			'bees':'[BEES]'
@@ -46,5 +59,9 @@ class TestDictionary {
 		Collection<TokenMatch> matches = dict.findMatches(tokens, dist, 0.0)
 		matches.each { println it }
 		assert matches.size() == 2
+		
+		matches = dict.findMatches(tokens, dist, 1.0)
+		matches.each { println it }
+		assert matches.size() == 4
 	}
 }

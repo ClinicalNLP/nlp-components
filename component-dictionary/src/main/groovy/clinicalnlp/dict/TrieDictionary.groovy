@@ -1,5 +1,9 @@
 package clinicalnlp.dict
 
+import groovy.transform.EqualsAndHashCode;
+import groovy.transform.Immutable
+import groovy.transform.ToString;
+
 
 /**
  * 
@@ -36,6 +40,7 @@ class TrieDictionary<Value> {
 		SearchState(Node<Value> node) { this.node = node }
 	}
 	
+	@EqualsAndHashCode
 	public static class TokenMatch<Value> {
 		Integer startTokenIdx
 		Integer endTokenIdx
@@ -116,12 +121,12 @@ class TrieDictionary<Value> {
 	 * @param tolerance
 	 * @return
 	 */
-	public Collection<TokenMatch<Value>> findMatches(
+	public Set<TokenMatch<Value>> findMatches(
 		final Collection<CharSequence> tokens,
 		final DynamicStringDist dist,
 		final Double tolerance) {
 
-		Collection<TokenMatch<Value>> matches = new ArrayList<>();
+		Set<TokenMatch<Value>> matches = new HashSet<>();
 		
 		// initialize string distance instance with tokens
 		dist.init(tokens);

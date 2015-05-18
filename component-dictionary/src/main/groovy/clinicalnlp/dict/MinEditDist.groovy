@@ -113,7 +113,7 @@ public class MinEditDist implements DynamicStringDist {
 		Collection<Integer[]> matches = new ArrayList<>()
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer endIndex ->
-			if (bptr.score <= tolerance && text.charAt(endIndex+1) == TOKEN_SEP_CHAR) {
+			if (bptr.score <= tolerance && (endIndex+1 == text.size() || text.charAt(endIndex+1) == TOKEN_SEP_CHAR)) {
 				log.info "Match found: ${bptr.startIdx}, ${endIndex}; substring: ${text.subSequence(bptr.startIdx+1, endIndex+1)}"
 				matches << ([
 					(text.charAt(bptr.startIdx) == TOKEN_SEP_CHAR ? this.str2tok[bptr.startIdx+1] : this.str2tok[bptr.startIdx]),

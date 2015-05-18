@@ -1,17 +1,14 @@
 package clinicalnlp.dict
 
 import groovy.transform.EqualsAndHashCode
-import groovy.transform.Immutable
 import groovy.transform.ToString
 
-@Immutable
 @ToString(includeNames=true)
 @EqualsAndHashCode
 class ObjectValueVariant {
 	String value;
 }
 
-@Immutable
 @ToString(includeNames=true)
 @EqualsAndHashCode
 class ObjectValue {
@@ -23,7 +20,6 @@ class ObjectValue {
 	Collection<ObjectValueVariant> object_value_variants;
 }
 
-@Immutable
 @ToString(includeNames=true)
 @EqualsAndHashCode
 class AbstractionSchema {
@@ -33,11 +29,4 @@ class AbstractionSchema {
 	String preferred_name;
 	Collection<String> predicate_variants;
 	Collection<ObjectValue> object_values;
-}
-
-@Immutable
-@ToString(includeNames=true)
-@EqualsAndHashCode
-class AbstractionSchemaContainer {
-	AbstractionSchema abstractor_abstraction_schema;
 }

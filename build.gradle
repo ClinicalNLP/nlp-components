@@ -98,6 +98,7 @@ project(':component-tokenizer') {
 project(':component-dictionary') {
 	dependencies { 
 		compile project(':component-tokenizer') 
+        compile fileTree(dir: 'lib', include: '*.jar')
 	}
 }
 

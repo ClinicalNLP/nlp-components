@@ -1,8 +1,7 @@
 package clinicalnlp.dict.trie
 
-import clinicalnlp.dict.DictEntry
 import clinicalnlp.dict.DictModel
-import clinicalnlp.dict.DictTokenSerializer
+import clinicalnlp.dict.DictModelFactory
 import clinicalnlp.dict.TokenMatch
 import clinicalnlp.dict.stringdist.DynamicStringDist
 
@@ -55,7 +54,7 @@ class TrieDict<Value> implements DictModel<Value> {
 
 	@Override	
 	public Value get (final Collection<CharSequence> tokens) {
-		return (getNode(root, DictTokenSerializer.serialize(tokens), 0))?.value
+		return (getNode(root,DictModelFactory.join(tokens), 0))?.value
 	}
 	
 	private Node<Value> getNode(Node<Value> node, CharSequence key, int index) {
@@ -67,7 +66,7 @@ class TrieDict<Value> implements DictModel<Value> {
 	
 	@Override
 	public void put(final Collection<CharSequence> keyTokens, final Value value) {
-		root = putNode(root, DictTokenSerializer.serialize(keyTokens), value, 0)
+		root = putNode(root, DictModelFactory.join(keyTokens), value, 0)
 	}
 			
 	private Node<Value> putNode(Node<Value> node, CharSequence key, Value value, int index) {

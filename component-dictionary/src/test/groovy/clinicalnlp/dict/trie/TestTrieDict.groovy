@@ -17,7 +17,6 @@ import clinicalnlp.dict.DictEntry
 import clinicalnlp.dict.TokenMatch
 import clinicalnlp.dict.stringdist.DynamicStringDist
 import clinicalnlp.dict.stringdist.MinEditDist
-import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
 @Log4j
 class TestTrieDict {

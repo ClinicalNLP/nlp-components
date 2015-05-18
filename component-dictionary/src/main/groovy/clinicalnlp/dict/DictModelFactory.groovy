@@ -1,28 +1,33 @@
 package clinicalnlp.dict
 
+import java.util.Collection;
+
+import opennlp.tools.tokenize.Tokenizer
 import opennlp.tools.tokenize.TokenizerME
 import opennlp.tools.util.Span
-import clinicalnlp.dict.phrase.PhraseDictModel
+import clinicalnlp.dict.phrase.PhraseDict
+import clinicalnlp.dict.trie.TrieDict
 
 class DictModelFactory {
+	
+	static public CharSequence TOKEN_SEP = ' '
 	
 	public static String DICT_MODEL_TYPE_PHRASE = "Phrase"
 	public static String DICT_MODEL_TYPE_TRIE = "Trie"
 	
 	static public DictModel make(final String dictModelType, 
 		final AbstractionSchema schema, 
-		final TokenizerME tokenizer, 
-		final Boolean caseInsensitive) {
+		final Tokenizer tokenizer) {
 		
 		DictModel model;
 		
 		switch (dictModelType) {
-//			case DICT_MODEL_TYPE_TRIE: 
-//			model = new TrieDictModel(caseInsensitive)
-//			break;
+			case DICT_MODEL_TYPE_TRIE: 
+			model = new TrieDict()
+			break;
 			
 			case DICT_MODEL_TYPE_PHRASE:
-			model = new PhraseDictModel(caseInsensitive)
+			model = new PhraseDict()
 			break
 		}
 				
@@ -34,7 +39,7 @@ class DictModelFactory {
 			objVal.object_value_variants.each { ObjectValueVariant variant ->
 				entry.variants << tokenize(variant.value, tokenizer)
 			}
-			model.add(entry)
+			model.put(entry.canonical, entry)
 		}
 		return model
 	}
@@ -46,5 +51,17 @@ class DictModelFactory {
 			tokens << phrase.substring(span.getStart(), span.getEnd())
 		}
 		return tokens
+	}
+	
+	static public String join(final Collection<CharSequence> tokens, boolean wrap = false) {
+		StringJoiner joiner;
+		if (wrap == true) {
+			joiner = new StringJoiner(TOKEN_SEP, TOKEN_SEP, TOKEN_SEP)
+		}
+		else {
+			joiner = new StringJoiner(TOKEN_SEP)
+		}
+		tokens.each { joiner.add(it) }
+		return joiner.toString()
 	}
 }

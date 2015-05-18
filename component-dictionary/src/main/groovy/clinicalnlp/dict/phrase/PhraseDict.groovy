@@ -4,52 +4,52 @@ import groovy.util.logging.Log4j
 import opennlp.tools.tokenize.SimpleTokenizer
 import opennlp.uima.tokenize.Tokenizer
 import clinicalnlp.dict.DictEntry
+import clinicalnlp.dict.DictModel
+import clinicalnlp.dict.DictModelFactory
 import clinicalnlp.dict.TokenMatch
+import clinicalnlp.dict.stringdist.DynamicStringDist
 
 import com.wcohen.ss.JaroWinkler
 import com.wcohen.ss.SoftTFIDF
 
 @Log4j
-public class PhraseDictModel<Value> {
+public class PhraseDict<Value> implements DictModel<Value> {
 		
-	private Map<String[], Value> entries = new HashMap<>()
+	private Map<Collection<CharSequence>, Value> entries = new HashMap<>()
 	private PhraseTree phrases = new PhraseTree()
 	
 	private Boolean caseInsensitive;
 
-	public PhraseDictModel(Boolean caseInsensitive) {
+	public PhraseDict(Boolean caseInsensitive) {
 		this.caseInsensitive = caseInsensitive;
 	}
 	
-//	@Override
-	public DictEntry get(String[] tokens) {
-		return this.entries.get(this.join(tokens))
+	@Override
+	public DictEntry get(final Collection<CharSequence> tokens) {
+		return this.entries.get(DictModelFactory.join(tokens))
 	}
-
-//	@Override
-	public void add(final DictEntry entry) {
-		this.phrases.addPhrase(this.transformArray(entry.canonical))
-		this.entries.put(this.join(entry.canonical), entry)
-		entry.variants.each {
-			this.phrases.addPhrase(this.transformArray(it))
-			this.entries.put(this.join(it), entry)
-		}
+	
+	@Override
+	public void put (final Collection<CharSequence> tokens, final Value entry) {
+		Collection<CharSequence> transformedTokens = this.transform(tokens)
+		this.phrases.addPhrase(transformedTokens)
+		this.entries.put(DictModelFactory.join(transformedTokens), entry)
 	}
 		
-//	@Override
-	public Set<TokenMatch> findMatches(final String[] tokens) {
+	@Override
+	public Set<TokenMatch> matches(final Collection<CharSequence> tokens) {
 		Set<TokenMatch> matches = new HashSet<>()
 		
-		for (int i = 0; i < tokens.length; i++) {
-			String[] tokensToEnd = tokens[i, tokens.length - 1]
-			tokensToEnd = transformArray(tokensToEnd)
+		for (int i = 0; i < tokens.size(); i++) {
+			String[] tokensToEnd = tokens[i, tokens.size() - 1]
+			tokensToEnd = transform(tokensToEnd)
 			Integer endMatchPosition = phrases.getLongestMatch(tokensToEnd)
 			if (endMatchPosition != null) {
 				String[] matchedTokens = Arrays.copyOfRange(tokensToEnd, 0, endMatchPosition)
 				matches << new TokenMatch(
 					begin:i,
 					end:(i+endMatchPosition),
-					entry:entries.get(this.join(matchedTokens))
+					entry:entries.get(DictModelFactory.join(matchedTokens))
 					)
 			}
 		}
@@ -57,8 +57,8 @@ public class PhraseDictModel<Value> {
 		return matches;
 	}
 	
-//	@Override
-	public Set<TokenMatch> findMatches(String[] tokens, Double tolerance) {
+	@Override
+	public Set<TokenMatch> matches(final Collection<CharSequence> tokens, final DynamicStringDist dist, Double tolerance) {
 		Set<TokenMatch> matches = new HashSet<>()
 		
 		Tokenizer tokenizer = new SimpleTokenizer(false,true);
@@ -66,9 +66,8 @@ public class PhraseDictModel<Value> {
 		
 		return matches;
 	}
-
-
-	private String[] transformArray(String[] tokens) {
+	
+	private Collection<CharSequence> transform(Collection<CharSequence> tokens) {
 		tokens.eachWithIndex { tok, i ->
 			tokens[i] = transform(tok)
 		}
@@ -80,13 +79,5 @@ public class PhraseDictModel<Value> {
 			token = token.toLowerCase()
 		}
 		return token
-	}
-	
-	private String join(String[] tokens, String sep=' ') {
-		StringJoiner joiner = new StringJoiner(sep)
-		tokens.each {
-			joiner.add(this.transform(it))
-		}
-		return joiner.toString()
 	}
 }

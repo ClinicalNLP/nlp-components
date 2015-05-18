@@ -1,6 +1,6 @@
 package clinicalnlp.dict.stringdist
 import groovy.util.logging.Log4j
-import clinicalnlp.dict.DictTokenSerializer
+import clinicalnlp.dict.DictModelFactory
 
 @Log4j
 public class MinEditDist implements DynamicStringDist {
@@ -50,14 +50,14 @@ public class MinEditDist implements DynamicStringDist {
 		if (tokens == null) { throw new NullPointerException() }
 		if (tokens.size() == 0) { throw new IllegalArgumentException("must have at least one token to match") }
 
-		this.text = DictTokenSerializer.serialize(tokens, true)				
+		this.text = DictModelFactory.join(tokens, true)				
 		log.info "Initialized with text: [${this.text}]"
 		
 		BackPtr[] bottomRow = new BackPtr[this.text.length()]
 		int score = 0
 		int tokIdx = -1
 		for (int i = 0; i < text.size(); i++) {
-			if (text[i] == DictTokenSerializer.TOKEN_SEP) { score = 0; tokIdx++ }
+			if (text[i] == DictModelFactory.TOKEN_SEP) { score = 0; tokIdx++ }
 			else { this.str2tok[i] = tokIdx; }
 			bottomRow[i] = new BackPtr(startIdx:i, score:score++)
 		}
@@ -105,11 +105,11 @@ public class MinEditDist implements DynamicStringDist {
 		Collection<Integer[]> matches = new ArrayList<>()
 		BackPtr[] toprow = rows.peek()
 		toprow.eachWithIndex { BackPtr bptr, Integer endIndex ->
-			if (bptr.score <= tolerance && (endIndex+1 == text.size() || text.charAt(endIndex+1) == DictTokenSerializer.TOKEN_SEP)) {
+			if (bptr.score <= tolerance && (endIndex+1 == text.size() || text.charAt(endIndex+1) == DictModelFactory.TOKEN_SEP)) {
 				log.info "Match found: ${bptr.startIdx}, ${endIndex}; substring: ${text.subSequence(bptr.startIdx+1, endIndex+1)}"
 				matches << ([
-					(text.charAt(bptr.startIdx) == DictTokenSerializer.TOKEN_SEP ? this.str2tok[bptr.startIdx+1] : this.str2tok[bptr.startIdx]),
-					(text.charAt(endIndex) == DictTokenSerializer.TOKEN_SEP ? this.str2tok[endIndex-1] : this.str2tok[endIndex]),
+					(text.charAt(bptr.startIdx) == DictModelFactory.TOKEN_SEP ? this.str2tok[bptr.startIdx+1] : this.str2tok[bptr.startIdx]),
+					(text.charAt(endIndex) == DictModelFactory.TOKEN_SEP ? this.str2tok[endIndex-1] : this.str2tok[endIndex]),
 					] as Integer[])
 			}
 		}

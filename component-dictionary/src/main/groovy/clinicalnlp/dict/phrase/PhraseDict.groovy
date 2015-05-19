@@ -1,8 +1,6 @@
 package clinicalnlp.dict.phrase;
 
 import groovy.util.logging.Log4j
-import opennlp.tools.tokenize.SimpleTokenizer
-import opennlp.uima.tokenize.Tokenizer
 import clinicalnlp.dict.DictEntry
 import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.DictModelFactory
@@ -11,18 +9,18 @@ import clinicalnlp.dict.stringdist.DynamicStringDist
 
 import com.wcohen.ss.JaroWinkler
 import com.wcohen.ss.SoftTFIDF
+import com.wcohen.ss.api.Tokenizer
+import com.wcohen.ss.tokens.SimpleTokenizer
 
 @Log4j
 public class PhraseDict<Value> implements DictModel<Value> {
 		
 	private Map<Collection<CharSequence>, Value> entries = new HashMap<>()
 	private PhraseTree phrases = new PhraseTree()
+	private Integer numEntries = 0
 	
-	private Boolean caseInsensitive;
-
-	public PhraseDict(Boolean caseInsensitive) {
-		this.caseInsensitive = caseInsensitive;
-	}
+	@Override
+	public Integer getNumEntries() { return numEntries; }
 	
 	@Override
 	public DictEntry get(final Collection<CharSequence> tokens) {
@@ -31,9 +29,9 @@ public class PhraseDict<Value> implements DictModel<Value> {
 	
 	@Override
 	public void put (final Collection<CharSequence> tokens, final Value entry) {
-		Collection<CharSequence> transformedTokens = this.transform(tokens)
-		this.phrases.addPhrase(transformedTokens)
-		this.entries.put(DictModelFactory.join(transformedTokens), entry)
+		this.phrases.addPhrase(tokens as String[])
+		this.entries.put(DictModelFactory.join(tokens), entry)
+		this.numEntries++
 	}
 		
 	@Override
@@ -42,14 +40,13 @@ public class PhraseDict<Value> implements DictModel<Value> {
 		
 		for (int i = 0; i < tokens.size(); i++) {
 			String[] tokensToEnd = tokens[i, tokens.size() - 1]
-			tokensToEnd = transform(tokensToEnd)
 			Integer endMatchPosition = phrases.getLongestMatch(tokensToEnd)
 			if (endMatchPosition != null) {
 				String[] matchedTokens = Arrays.copyOfRange(tokensToEnd, 0, endMatchPosition)
 				matches << new TokenMatch(
-					begin:i,
-					end:(i+endMatchPosition),
-					entry:entries.get(DictModelFactory.join(matchedTokens))
+					startTokenIdx:i,
+					endTokenIdx:(i+endMatchPosition),
+					value:entries.get(DictModelFactory.join(matchedTokens))
 					)
 			}
 		}
@@ -65,19 +62,5 @@ public class PhraseDict<Value> implements DictModel<Value> {
 		SoftTFIDF distance = new SoftTFIDF(tokenizer, new JaroWinkler(), tolerance);
 		
 		return matches;
-	}
-	
-	private Collection<CharSequence> transform(Collection<CharSequence> tokens) {
-		tokens.eachWithIndex { tok, i ->
-			tokens[i] = transform(tok)
-		}
-		return tokens
-	}
-
-	private String transform(String token) {
-		if (caseInsensitive) {
-			token = token.toLowerCase()
-		}
-		return token
-	}
+	}	
 }

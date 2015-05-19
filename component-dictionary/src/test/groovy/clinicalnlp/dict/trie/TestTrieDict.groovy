@@ -14,13 +14,14 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import clinicalnlp.dict.DictEntry
+import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.TokenMatch
 import clinicalnlp.dict.stringdist.DynamicStringDist
 import clinicalnlp.dict.stringdist.MinEditDist
 
 @Log4j
 class TestTrieDict {
-	TrieDict<DictEntry> dict;
+	DictModel<DictEntry> dict;
 	Map<Collection<CharSequence>, DictEntry> entries;
 	
 	@BeforeClass

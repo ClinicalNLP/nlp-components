@@ -52,8 +52,12 @@ class DictModelFactory {
 		}
 		return tokens
 	}
-	
+
 	static public String join(final Collection<CharSequence> tokens, boolean wrap = false) {
+		return join(tokens as CharSequence[], wrap)
+	}
+
+	static public String join(final CharSequence[] tokens, boolean wrap = false) {
 		StringJoiner joiner;
 		if (wrap == true) {
 			joiner = new StringJoiner(TOKEN_SEP, TOKEN_SEP, TOKEN_SEP)

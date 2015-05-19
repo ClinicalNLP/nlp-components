@@ -51,6 +51,9 @@ class TrieDict<Value> implements DictModel<Value> {
 	// ------------------------------------------------------------------------
 	// Methods
 	// ------------------------------------------------------------------------
+	
+	@Override
+	public Integer getNumEntries() { return numEntries; }
 
 	@Override	
 	public Value get (final Collection<CharSequence> tokens) {

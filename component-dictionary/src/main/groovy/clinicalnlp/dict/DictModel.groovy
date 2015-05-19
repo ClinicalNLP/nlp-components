@@ -6,6 +6,8 @@ import java.util.Collection
 
 public interface DictModel<Value> {
 	
+	public Integer getNumEntries()
+	
 	public Value get (final Collection<CharSequence> tokens);
 	
 	public void put (final Collection<CharSequence> tokens, final Value entry);

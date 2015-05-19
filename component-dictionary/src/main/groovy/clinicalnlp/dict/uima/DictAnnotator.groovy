@@ -12,9 +12,10 @@ import org.apache.uima.jcas.cas.FSArray
 import org.apache.uima.jcas.tcas.Annotation
 import org.apache.uima.resource.ResourceInitializationException
 
-import clinicalnlp.dict.DictModel;
-import clinicalnlp.dict.DictModelPool;
-import clinicalnlp.dict.TokenMatch;
+import clinicalnlp.dict.DictModel
+import clinicalnlp.dict.DictModelPool
+import clinicalnlp.dict.TokenMatch
+import clinicalnlp.dsl.UIMAUtil
 
 @Log4j
 public class DictAnnotator extends JCasAnnotator_ImplBase {

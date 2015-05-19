@@ -11,6 +11,7 @@ import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.cas.FSArray
 import org.apache.uima.jcas.tcas.Annotation
 import org.apache.uima.resource.ResourceInitializationException
+import org.cleartk.token.type.Token
 
 import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.DictModelPool
@@ -67,13 +68,13 @@ public class DictAnnotator extends JCasAnnotator_ImplBase {
 		UIMAUtil.jcas = jcas
 		
 		Class<Annotation> ContainerClass = Class.forName(containerClassName)
-		select(type:ContainerClass).each { container ->
-			Collection<Annotation> anns = select(type:BaseToken, filter:coveredBy(container))
+		select(type:ContainerClass).each { Annotation container ->
+			Collection<Annotation> anns = select(type:Token, filter:coveredBy(container))
 			Collection<String> tokens = new ArrayList<>()
 			anns.each { Annotation ann ->
 				tokens << ann.coveredText
 			}
-			Collection<TokenMatch> matches = dict.findMatches(tokens as String[])
+			Collection<TokenMatch> matches = dict.matches(tokens)
 			matches.each { TokenMatch m ->
 				Collection<Annotation> matched = new ArrayList<>()
 				for (int i = m.begin; i < m.end; i++) {

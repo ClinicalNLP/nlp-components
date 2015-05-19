@@ -127,8 +127,8 @@ class TrieDict<Value> implements DictModel<Value> {
 				if (nextNode.value != null) {
 					Collection<Integer[]> strm = dist.matches(tolerance);
 					for (Integer[] tokenIndices : strm) {
-						matches.add(new TokenMatch<Value>(startTokenIdx:tokenIndices[0], 
-							endTokenIdx:tokenIndices[1], value:nextNode.value));
+						matches.add(new TokenMatch<Value>(begin:tokenIndices[0], 
+							end:tokenIndices[1], value:nextNode.value));
 					}
 				}
 			}

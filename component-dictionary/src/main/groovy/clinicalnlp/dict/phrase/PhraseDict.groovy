@@ -44,8 +44,8 @@ public class PhraseDict<Value> implements DictModel<Value> {
 			if (endMatchPosition != null) {
 				String[] matchedTokens = Arrays.copyOfRange(tokensToEnd, 0, endMatchPosition)
 				matches << new TokenMatch(
-					startTokenIdx:i,
-					endTokenIdx:(i+endMatchPosition),
+					begin:i,
+					end:(i+endMatchPosition),
 					value:entries.get(DictModelFactory.join(matchedTokens))
 					)
 			}

@@ -1,4 +1,4 @@
-package org.northshore.cbri.sent
+package clinicalnlp.sent
 
 import static org.junit.Assert.*
 import groovy.util.logging.Log4j

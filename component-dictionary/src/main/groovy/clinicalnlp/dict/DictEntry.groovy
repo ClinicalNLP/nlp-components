@@ -8,7 +8,7 @@ import groovy.transform.ToString
 class DictEntry {
 	String vocab
 	String code
-	String[] canonical
-	Collection<String[]> variants = new ArrayList<>()
-	Map<String, String> attrs = new HashMap<>()
+	Collection<CharSequence> canonical
+//	Collection<Collection<CharSequence>> variants = new ArrayList<>()
+//	Map<String, String> attrs = new HashMap<>()
 }

@@ -33,8 +33,8 @@ class TestPhraseDict {
 		
 		this.dict = new PhraseDict<DictEntry>()		
 		this.entries = [
-			['bee']:(new DictEntry(vocab:'V1', code:'C1', canonical:'bee')),
-			['bees']:(new DictEntry(vocab:'V1', code:'C2', canonical:'bees'))
+			['bee']:(new DictEntry(vocab:'V1', code:'C1', canonical:['bee'])),
+			['bees']:(new DictEntry(vocab:'V1', code:'C2', canonical:['bees']))
 			]		
 		this.entries.each { Collection<CharSequence> k, DictEntry v ->
 			dict.put(k, v)

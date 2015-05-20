@@ -11,7 +11,6 @@ import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.cas.FSArray
 import org.apache.uima.jcas.tcas.Annotation
 import org.apache.uima.resource.ResourceInitializationException
-import org.cleartk.token.type.Token
 
 import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.DictModelPool
@@ -48,8 +47,12 @@ public class DictAnnotator extends JCasAnnotator_ImplBase {
 	private Integer dictionaryId
 
 	public static final String PARAM_CONTAINER_CLASS = 'containerClassName'
-	@ConfigurationParameter(name='containerClassName', mandatory=true, defaultValue='org.apache.ctakes.typesystem.type.textspan.Sentence')
+	@ConfigurationParameter(name='containerClassName', mandatory=true, defaultValue='org.cleartk.token.type.Sentence')
 	private String containerClassName
+
+	public static final String PARAM_TOKEN_CLASS = 'tokenClassName'
+	@ConfigurationParameter(name='tokenClassName', mandatory=true, defaultValue='org.cleartk.token.type.Token')
+	private String tokenClassName
 
 	@Override
 	public void initialize(UimaContext aContext) throws ResourceInitializationException {
@@ -68,8 +71,10 @@ public class DictAnnotator extends JCasAnnotator_ImplBase {
 		UIMAUtil.jcas = jcas
 		
 		Class<Annotation> ContainerClass = Class.forName(containerClassName)
+		Class<Annotation> TokenClass = Class.forName(tokenClassName)
+
 		select(type:ContainerClass).each { Annotation container ->
-			Collection<Annotation> anns = select(type:Token, filter:coveredBy(container))
+			Collection<Annotation> anns = select(type:TokenClass, filter:coveredBy(container))
 			Collection<String> tokens = new ArrayList<>()
 			anns.each { Annotation ann ->
 				tokens << ann.coveredText
@@ -80,13 +85,13 @@ public class DictAnnotator extends JCasAnnotator_ImplBase {
 				for (int i = m.begin; i < m.end; i++) {
 					matched << anns.get(i)
 				}
-				UIMAUtil.create(type:DictMatch,
-				canonical:m.entry.canonical,
-				code:m.entry.code,
-				vocabulary:m.entry.vocabulary,
-				container:container,
-				matchedTokens:matched
-				)
+//				UIMAUtil.create(type:DictMatch,
+//				canonical:m.value.canonical,
+//				code:m.entry.code,
+//				vocabulary:m.entry.vocabulary,
+//				container:container,
+//				matchedTokens:matched
+//				)
 			}
 		}
 	}

@@ -23,11 +23,11 @@ class DictModelFactory {
 		
 		switch (dictModelType) {
 			case DICT_MODEL_TYPE_TRIE: 
-			model = new TrieDict()
+			model = new TrieDict<DictEntry>()
 			break;
 			
 			case DICT_MODEL_TYPE_PHRASE:
-			model = new PhraseDict()
+			model = new PhraseDict<DictEntry>()
 			break
 		}
 				
@@ -36,9 +36,6 @@ class DictModelFactory {
 			entry.vocab = objVal.vocabulary
 			entry.code = objVal.vocabulary_code
 			entry.canonical = tokenize(objVal.value, tokenizer)
-			objVal.object_value_variants.each { ObjectValueVariant variant ->
-				entry.variants << tokenize(variant.value, tokenizer)
-			}
 			model.put(entry.canonical, entry)
 		}
 		return model

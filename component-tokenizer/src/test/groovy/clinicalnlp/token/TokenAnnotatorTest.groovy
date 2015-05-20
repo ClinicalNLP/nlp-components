@@ -1,4 +1,4 @@
-package org.northshore.cbri.token;
+package clinicalnlp.token;
 
 import static org.junit.Assert.*
 import groovy.util.logging.Log4j

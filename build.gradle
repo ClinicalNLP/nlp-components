@@ -22,8 +22,6 @@ allprojects {
         compile group: 'org.apache.uima', name: 'uimaj-document-annotation', version: '2.6.0'
         compile group: 'org.apache.uima', name: 'uimafit-core', version: '2.1.0'
         
-        ////compile group: 'de.tudarmstadt.ukp.dkpro.core', name: 'de.tudarmstadt.ukp.dkpro.core.io.text-asl', version: '1.7.0'
-
         compile group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '3.5.0'
         
         compile group: 'org.cleartk', name: 'cleartk-type-system', version: '2.0.0'
@@ -38,6 +36,8 @@ allprojects {
 		
         compile group: 'log4j', name: 'log4j', version: '1.2.17'
         compile group: 'com.lexicalscope.jewelcli', name: 'jewelcli', version: '0.8.9'
+		
+		compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.1'
 		
         compile fileTree(dir: 'lib', include: '*.jar')
 
@@ -97,8 +97,10 @@ project(':component-tokenizer') {
 
 project(':component-dictionary') {
 	dependencies { 
-		compile project(':component-tokenizer') 
+		compile project(':component-groovy-dsl')
         compile fileTree(dir: 'lib', include: '*.jar')
+		testCompile project(':component-sentence-detector') 
+		testCompile project(':component-tokenizer') 
 	}
 }
 

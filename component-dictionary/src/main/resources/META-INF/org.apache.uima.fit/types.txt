@@ -1,2 +1,2 @@
 classpath*:org/cleartk/TypeSystem.xml
-classpath*:descriptors/SegmentTypeSystem.xml
+classpath*:descriptors/DictionaryTypeSystem.xml

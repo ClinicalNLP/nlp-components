@@ -4,6 +4,7 @@ import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.DictModelFactory
 import clinicalnlp.dict.TokenMatch
 import clinicalnlp.dict.stringdist.DynamicStringDist
+import clinicalnlp.dict.stringdist.MinEditDist
 
 
 /**
@@ -93,7 +94,7 @@ class TrieDict<Value> implements DictModel<Value> {
 	
 	@Override
 	public Set<TokenMatch> matches(final Collection<CharSequence> tokens) {
-		return null;
+		return this.matches(tokens, new MinEditDist(), 0.0);
 	}
 
 	@Override

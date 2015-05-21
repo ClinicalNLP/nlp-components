@@ -1,5 +1,8 @@
 package clinicalnlp.dict.uima;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline
 import opennlp.tools.tokenize.TokenizerME
 import opennlp.tools.tokenize.TokenizerModel
 
@@ -16,6 +19,8 @@ import clinicalnlp.dict.AbstractionSchema
 import clinicalnlp.dict.DictModel
 import clinicalnlp.dict.DictModelFactory
 import clinicalnlp.dict.DictModelPool
+import clinicalnlp.dsl.GroovyAnnotator
+import clinicalnlp.dsl.UIMAUtil
 import clinicalnlp.sent.SentenceDetector
 import clinicalnlp.token.TokenAnnotator
 
@@ -52,7 +57,8 @@ class DictAnnotatorTest {
 				DictAnnotator.PARAM_CONTAINER_CLASS,
 				'org.cleartk.token.type.Sentence',
 				DictAnnotator.PARAM_TOKEN_CLASS,
-				'org.cleartk.token.type.Token'
+				'org.cleartk.token.type.Token',
+				DictAnnotator.PARAM_DICTIONARY_ID, 1
 				)
 		AnalysisEngine dictEngine = AnalysisEngineFactory.createEngine(dictDesc)
 		assert dictEngine != null
@@ -60,6 +66,8 @@ class DictAnnotatorTest {
 		// Aggregate pipeline
 		AggregateBuilder builder = new AggregateBuilder()
 		builder.with {
+			add createEngineDescription(GroovyAnnotator,
+					GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/SimpleSegmenter.groovy')
 			add sentDesc
 			add tokenDesc
 			add dictDesc
@@ -74,12 +82,13 @@ class DictAnnotatorTest {
 		File dictFile = new File(this.class.getResource('/abstractionSchema/test-abstraction-schema.json').file)
 		AbstractionSchema schema = mapper.readValue(dictFile, AbstractionSchema.class);
 		assert schema != null
-		
+
 		TokenizerME tokenizerME = new TokenizerME(new TokenizerModel(new File(this.class.getResource('/models/en-token.bin').file)))
 		assert tokenizerME != null
 
 		DictModel model1 = DictModelFactory.make(DictModelFactory.DICT_MODEL_TYPE_TRIE, schema, tokenizerME)
 		assert model1 != null
+		assert model1.get(["glioblastoma"]) != null
 
 		DictModel model2 = DictModelFactory.make(DictModelFactory.DICT_MODEL_TYPE_PHRASE, schema, tokenizerME)
 		assert model2 != null
@@ -92,5 +101,7 @@ class DictAnnotatorTest {
 		JCas jcas = engine.newJCas()
 		jcas.setDocumentText(text)
 		engine.process(jcas)
+		Collection<DictMatch> matches = UIMAUtil.select(type:DictMatch)
+		assert matches.size() == 2
 	}
 }

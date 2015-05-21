@@ -37,12 +37,17 @@ class DictModelFactory {
 			entry.code = objVal.vocabulary_code
 			entry.canonical = tokenize(objVal.value, tokenizer)
 			model.put(entry.canonical, entry)
+			objVal.object_value_variants.each { ObjectValueVariant variant ->
+				model.put(tokenize(variant.value, tokenizer), entry)
+				////entry.variants << tokenize(variant.value, tokenizer)
+			}
+
 		}
 		return model
 	}
 	
-	static public String[] tokenize(String phrase, TokenizerME tokenizer) {
-		Collection<String> tokens = new ArrayList<>()
+	static public Collection<CharSequence> tokenize(String phrase, TokenizerME tokenizer) {
+		Collection<Sequence> tokens = new ArrayList<>()
 		Span[] tokenSpans = tokenizer.tokenizePos(phrase)
 		tokenSpans.each { Span span ->
 			tokens << phrase.substring(span.getStart(), span.getEnd())

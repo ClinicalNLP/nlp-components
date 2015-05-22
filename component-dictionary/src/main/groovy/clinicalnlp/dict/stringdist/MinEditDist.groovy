@@ -1,8 +1,7 @@
 package clinicalnlp.dict.stringdist
-import java.util.Collection;
-
 import groovy.util.logging.Log4j
 import clinicalnlp.dict.DictModelFactory
+
 
 @Log4j
 public class MinEditDist implements DynamicStringDist {
@@ -10,7 +9,7 @@ public class MinEditDist implements DynamicStringDist {
 	// ------------------------------------------------------------------------
 	// Inner Classes
 	// ------------------------------------------------------------------------
-
+	
 	private static class BackPtr implements Comparable {
 		Double score
 		Integer startIdx
@@ -39,6 +38,24 @@ public class MinEditDist implements DynamicStringDist {
 	StringBuilder prefix = new StringBuilder()
 	Stack<BackPtr[]> rows = new Stack<>()
 	Map<Integer, Integer> str2tok = new TreeMap<>()
+	Closure costFunction = { Character c1, Character c2 -> 
+		// TODO: function set in API method.
+		// TODO: Use methods from java Character API: https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html
+		if (c1 == null && c2 == null) { throw new IllegalArgumentException('at least one character must be non-null') }
+		if (c1 == null) {
+			// insertion
+			return 1.0
+		}
+		else if (c2 == null) {
+			// deletion
+			return 1.0
+		}
+		else {
+			// substitution
+			if (c1 == c2) { return 0.0 }
+			else { return 1.0 }
+		}
+	}
 	
 	// ------------------------------------------------------------------------
 	// Methods
@@ -78,9 +95,15 @@ public class MinEditDist implements DynamicStringDist {
 		newrow[0] = new BackPtr(score:(toprow[0].score + 1), startIdx:0)
 		for (int i = 1; i < newrow.length; i++) {
 			def bptrs = [
-				new BackPtr(startIdx:toprow[i-1].startIdx, score:(c == text.charAt(i) ? toprow[i-1].score : toprow[i-1].score + 1 )),
-				new BackPtr(startIdx:toprow[i].startIdx, score:(toprow[i].score + 1)),
-				new BackPtr(startIdx:newrow[i-1].startIdx, score:(newrow[i-1].score + 1))
+				// substitution
+				new BackPtr(startIdx:toprow[i-1].startIdx, 
+					score:toprow[i-1].score + this.costFunction(text.charAt(i), c)),
+				// insertion
+				new BackPtr(startIdx:toprow[i].startIdx, 
+					score:(toprow[i].score + this.costFunction(null, c))),
+				// deletion
+				new BackPtr(startIdx:newrow[i-1].startIdx, 
+					score:(newrow[i-1].score + this.costFunction(text.charAt(i), null)))
 				]
 			newrow[i] = GroovyCollections.min(bptrs)
 		}

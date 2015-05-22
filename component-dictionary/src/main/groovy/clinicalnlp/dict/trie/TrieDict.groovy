@@ -105,7 +105,7 @@ class TrieDict<Value> implements DictModel<Value> {
 		Set<TokenMatch<Value>> matches = new HashSet<>();
 		
 		// initialize string distance instance with tokens
-		dist.init(tokens);
+		dist.set(tokens);
 		
 		// traverse trie to find matches
 		Stack<SearchState<Value>> agenda = new Stack<>();

@@ -1,4 +1,6 @@
 package clinicalnlp.dict.stringdist
+import java.util.Collection;
+
 import groovy.util.logging.Log4j
 import clinicalnlp.dict.DictModelFactory
 
@@ -46,7 +48,7 @@ public class MinEditDist implements DynamicStringDist {
 	 * 
 	 */
 	@Override
-	public void init(final Collection<CharSequence> tokens) {
+	public void set(final Collection<CharSequence> tokens) {
 		if (tokens == null) { throw new NullPointerException() }
 		if (tokens.size() == 0) { throw new IllegalArgumentException("must have at least one token to match") }
 
@@ -114,5 +116,19 @@ public class MinEditDist implements DynamicStringDist {
 			}
 		}
 		return matches
+	}
+
+	@Override
+	public Double add(Collection<CharSequence> tokens) {
+		if (tokens == null) { throw new NullPointerException() }
+		if (tokens.size() == 0) { throw new IllegalArgumentException("must have at least one token to match") }
+
+		CharSequence text = DictModelFactory.join(tokens, true)
+		log.info "Matching against tokens: [${this.text}]"
+
+		text.each { char c ->
+			this.push(c)
+		}
+		return GroovyCollections.min(this.rows.peek()).score
 	}
 }

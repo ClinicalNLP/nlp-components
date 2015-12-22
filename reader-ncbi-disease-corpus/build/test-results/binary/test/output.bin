@@ -1,0 +1,3 @@
+º0 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-test-util/2.0.0/e9bff1afd2fda95d95941a684dc6ede3eafd3ea5/cleartk-test-util-2.0.0.jar!/org/cleartk/test/util/type/TestTypeSystem.xml]
+«9 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-type-system/2.0.0/6808b7728cdec1e2f6c822a3c1f28fbbbd14a0bc/cleartk-type-system-2.0.0.jar!/org/cleartk/TypeSystem.xml]
+w479 [Test worker] DEBUG org.springframework.validation.DataBinder  - DataBinder requires binding of required fields []

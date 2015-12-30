@@ -1,26 +1,21 @@
-package clinicalnlp.dsl;
-
-import static clinicalnlp.dsl.UIMAUtil.*
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline
-import static org.junit.Assert.*
-
-import de.tudarmstadt.ukp.dkpro.core.io.text.*;
-
-import java.util.regex.Matcher
-
+package clinicalnlp.dsl
+import de.tudarmstadt.ukp.dkpro.core.io.text.*
 import org.apache.uima.analysis_engine.AnalysisEngine
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.factory.AggregateBuilder
-import org.apache.uima.fit.pipeline.SimplePipeline
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.tcas.DocumentAnnotation
 import org.cleartk.ne.type.NamedEntityMention
 import org.cleartk.token.type.Sentence
-import org.junit.Ignore
 import org.junit.Test
+
+import java.util.regex.Matcher
+
+import static clinicalnlp.dsl.UIMAUtil.*
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline
+import static org.junit.Assert.assertEquals
 
 class TestGroovyDSL {
     public static class NamedEntityMentionMatcher extends JCasAnnotator_ImplBase {

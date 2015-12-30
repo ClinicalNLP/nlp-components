@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.cleartk:cleartk-corpus:2.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-corpus/2.0.0/3c92bdd3a8510b053f99a86e03d0418dd9a97f6/cleartk-corpus-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-corpus/2.0.0/865d5ecd478121d884458eefd945a9fb98ed8344/cleartk-corpus-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

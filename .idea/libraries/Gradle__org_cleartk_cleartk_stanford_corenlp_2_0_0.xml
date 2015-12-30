@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.cleartk:cleartk-stanford-corenlp:2.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-stanford-corenlp/2.0.0/95b353661ac094cfc4dbbcca89cf090da13bb0a8/cleartk-stanford-corenlp-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-stanford-corenlp/2.0.0/9227218c91b65feca1579db1f87ca4d416c6a425/cleartk-stanford-corenlp-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

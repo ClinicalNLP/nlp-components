@@ -6,4 +6,6 @@ include 'component-groovy-dsl',
 		'component-sentence-detector',
 		'component-tokenizer',
 		'component-brat-annotator',
-		'component-relation-extractor'
+		'component-relation-extractor',
+		'reader-ncbi-disease-corpus'
+

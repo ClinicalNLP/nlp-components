@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/component-brat-annotator/component-brat-annotator.iml" filepath="$PROJECT_DIR$/component-brat-annotator/component-brat-annotator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-dictionary/component-dictionary.iml" filepath="$PROJECT_DIR$/component-dictionary/component-dictionary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-groovy-dsl/component-groovy-dsl.iml" filepath="$PROJECT_DIR$/component-groovy-dsl/component-groovy-dsl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-negation-detector/component-negation-detector.iml" filepath="$PROJECT_DIR$/component-negation-detector/component-negation-detector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-relation-extractor/component-relation-extractor.iml" filepath="$PROJECT_DIR$/component-relation-extractor/component-relation-extractor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-segmenter/component-segmenter.iml" filepath="$PROJECT_DIR$/component-segmenter/component-segmenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-sentence-detector/component-sentence-detector.iml" filepath="$PROJECT_DIR$/component-sentence-detector/component-sentence-detector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-tokenizer/component-tokenizer.iml" filepath="$PROJECT_DIR$/component-tokenizer/component-tokenizer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nlp-components.iml" filepath="$PROJECT_DIR$/nlp-components.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus.iml" filepath="$PROJECT_DIR$/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus.iml" />
+    </modules>
+  </component>
+</project>

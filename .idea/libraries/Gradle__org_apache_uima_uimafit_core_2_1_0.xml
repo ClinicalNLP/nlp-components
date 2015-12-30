@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.uima:uimafit-core:2.1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.uima/uimafit-core/2.1.0/942c772485c087dfe094678a85fe5d610f7fc8ac/uimafit-core-2.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.uima/uimafit-core/2.1.0/db536c29c9842e3f791f3cd781aa7759b1940031/uimafit-core-2.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.cleartk:cleartk-test-util:2.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-test-util/2.0.0/e9bff1afd2fda95d95941a684dc6ede3eafd3ea5/cleartk-test-util-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-test-util/2.0.0/fb7de7abc7d85cb9782eeba380a15586e034fca/cleartk-test-util-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

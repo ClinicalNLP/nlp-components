@@ -14,9 +14,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
-/**
- * Created by WKT on 12/21/15.
- */
+
+
 @Log4j
 class NCBIDiseaseCorpusReaderTest {
 
@@ -36,9 +35,11 @@ class NCBIDiseaseCorpusReaderTest {
     @Test
     public void smokeTest() {
 
-        // Collection Reader
+        // Corpus collection reader
         CollectionReaderDescription reader = CollectionReaderFactory.createReaderDescription(
-                NCBIDiseaseCorpusReader.class)
+                NCBIDiseaseCorpusReader.class,
+                NCBIDiseaseCorpusReader.PARAM_CORPUS_DIR,
+                '/Users/WKT/Data/NCBI_complete_corpus/trainset')
 
         // Tokenizer
         ExternalResourceDescription extDesc = ExternalResourceFactory.createExternalResourceDescription(
@@ -49,10 +50,9 @@ class NCBIDiseaseCorpusReaderTest {
                 'org.cleartk.token.type.Sentence',
                 TokenAnnotator.TOKEN_MODEL_KEY, extDesc)
 
-        // Token printer
+        // Printer
         AnalysisEngineDescription printer = AnalysisEngineFactory.createEngineDescription(GroovyAnnotator,
-                GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/TokenPrinter.groovy')
-
+                GroovyAnnotator.PARAM_SCRIPT_FILE, 'groovy/NCBIDiseaseCorpusWriter.groovy')
 
         // Run the pipeline
         SimplePipeline.runPipeline(reader, tokenizer, printer);

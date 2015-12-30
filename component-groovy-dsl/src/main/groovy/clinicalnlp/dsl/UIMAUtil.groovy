@@ -1,22 +1,16 @@
 package clinicalnlp.dsl
 
-import static org.apache.uima.fit.util.JCasUtil.*
-
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
-import org.apache.ctakes.typesystem.type.refsem.*
-import org.apache.ctakes.typesystem.type.relation.*
-import org.apache.ctakes.typesystem.type.structured.*
-import org.apache.ctakes.typesystem.type.syntax.*
-import org.apache.ctakes.typesystem.type.textsem.*
-import org.apache.ctakes.typesystem.type.textspan.*
-import org.apache.ctakes.typesystem.type.util.*
 import org.apache.uima.cas.text.AnnotationFS
 import org.apache.uima.jcas.JCas
 import org.apache.uima.jcas.cas.TOP
 import org.apache.uima.jcas.tcas.Annotation
 import org.cleartk.ne.type.NamedEntityMention
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+import static org.apache.uima.fit.util.JCasUtil.select
+import static org.apache.uima.fit.util.JCasUtil.selectAll
 
 /**
  * UIMAUtil implements the UIMA DSL

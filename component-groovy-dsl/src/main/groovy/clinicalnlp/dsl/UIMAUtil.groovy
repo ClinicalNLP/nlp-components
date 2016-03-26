@@ -11,6 +11,7 @@ import java.util.regex.Pattern
 
 import static org.apache.uima.fit.util.JCasUtil.select
 import static org.apache.uima.fit.util.JCasUtil.selectAll
+import static org.apache.uima.fit.util.JCasUtil.contains
 
 /**
  * UIMAUtil implements the UIMA DSL

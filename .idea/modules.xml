@@ -2,16 +2,42 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/component-brat-annotator/component-brat-annotator.iml" filepath="$PROJECT_DIR$/component-brat-annotator/component-brat-annotator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-dictionary/component-dictionary.iml" filepath="$PROJECT_DIR$/component-dictionary/component-dictionary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-groovy-dsl/component-groovy-dsl.iml" filepath="$PROJECT_DIR$/component-groovy-dsl/component-groovy-dsl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-negation-detector/component-negation-detector.iml" filepath="$PROJECT_DIR$/component-negation-detector/component-negation-detector.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-relation-extractor/component-relation-extractor.iml" filepath="$PROJECT_DIR$/component-relation-extractor/component-relation-extractor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-segmenter/component-segmenter.iml" filepath="$PROJECT_DIR$/component-segmenter/component-segmenter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-sentence-detector/component-sentence-detector.iml" filepath="$PROJECT_DIR$/component-sentence-detector/component-sentence-detector.iml" />
-      <module fileurl="file://$PROJECT_DIR$/component-tokenizer/component-tokenizer.iml" filepath="$PROJECT_DIR$/component-tokenizer/component-tokenizer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/nlp-components.iml" filepath="$PROJECT_DIR$/nlp-components.iml" />
-      <module fileurl="file://$PROJECT_DIR$/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus.iml" filepath="$PROJECT_DIR$/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-brat-annotator/component-brat-annotator.iml" filepath="$PROJECT_DIR$/.idea/modules/component-brat-annotator/component-brat-annotator.iml" group="component-brat-annotator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-brat-annotator/component-brat-annotator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-brat-annotator/component-brat-annotator_main.iml" group="component-brat-annotator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-brat-annotator/component-brat-annotator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-brat-annotator/component-brat-annotator_test.iml" group="component-brat-annotator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-chunker/component-chunker.iml" filepath="$PROJECT_DIR$/.idea/modules/component-chunker/component-chunker.iml" group="component-chunker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-chunker/component-chunker_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-chunker/component-chunker_main.iml" group="component-chunker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-chunker/component-chunker_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-chunker/component-chunker_test.iml" group="component-chunker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-dictionary/component-dictionary.iml" filepath="$PROJECT_DIR$/.idea/modules/component-dictionary/component-dictionary.iml" group="component-dictionary" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-dictionary/component-dictionary_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-dictionary/component-dictionary_main.iml" group="component-dictionary" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-dictionary/component-dictionary_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-dictionary/component-dictionary_test.iml" group="component-dictionary" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-groovy-dsl/component-groovy-dsl.iml" filepath="$PROJECT_DIR$/.idea/modules/component-groovy-dsl/component-groovy-dsl.iml" group="component-groovy-dsl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-groovy-dsl/component-groovy-dsl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-groovy-dsl/component-groovy-dsl_main.iml" group="component-groovy-dsl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-groovy-dsl/component-groovy-dsl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-groovy-dsl/component-groovy-dsl_test.iml" group="component-groovy-dsl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-negation-detector/component-negation-detector.iml" filepath="$PROJECT_DIR$/.idea/modules/component-negation-detector/component-negation-detector.iml" group="component-negation-detector" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-negation-detector/component-negation-detector_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-negation-detector/component-negation-detector_main.iml" group="component-negation-detector" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-negation-detector/component-negation-detector_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-negation-detector/component-negation-detector_test.iml" group="component-negation-detector" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-pos-tagger/component-pos-tagger.iml" filepath="$PROJECT_DIR$/.idea/modules/component-pos-tagger/component-pos-tagger.iml" group="component-pos-tagger" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-pos-tagger/component-pos-tagger_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-pos-tagger/component-pos-tagger_main.iml" group="component-pos-tagger" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-pos-tagger/component-pos-tagger_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-pos-tagger/component-pos-tagger_test.iml" group="component-pos-tagger" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-relation-extractor/component-relation-extractor.iml" filepath="$PROJECT_DIR$/.idea/modules/component-relation-extractor/component-relation-extractor.iml" group="component-relation-extractor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-relation-extractor/component-relation-extractor_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-relation-extractor/component-relation-extractor_main.iml" group="component-relation-extractor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-relation-extractor/component-relation-extractor_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-relation-extractor/component-relation-extractor_test.iml" group="component-relation-extractor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-segmenter/component-segmenter.iml" filepath="$PROJECT_DIR$/.idea/modules/component-segmenter/component-segmenter.iml" group="component-segmenter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-segmenter/component-segmenter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-segmenter/component-segmenter_main.iml" group="component-segmenter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-segmenter/component-segmenter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-segmenter/component-segmenter_test.iml" group="component-segmenter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-sentence-detector/component-sentence-detector.iml" filepath="$PROJECT_DIR$/.idea/modules/component-sentence-detector/component-sentence-detector.iml" group="component-sentence-detector" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-sentence-detector/component-sentence-detector_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-sentence-detector/component-sentence-detector_main.iml" group="component-sentence-detector" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-sentence-detector/component-sentence-detector_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-sentence-detector/component-sentence-detector_test.iml" group="component-sentence-detector" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-tokenizer/component-tokenizer.iml" filepath="$PROJECT_DIR$/.idea/modules/component-tokenizer/component-tokenizer.iml" group="component-tokenizer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-tokenizer/component-tokenizer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/component-tokenizer/component-tokenizer_main.iml" group="component-tokenizer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/component-tokenizer/component-tokenizer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/component-tokenizer/component-tokenizer_test.iml" group="component-tokenizer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nlp-components.iml" filepath="$PROJECT_DIR$/.idea/modules/nlp-components.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nlp-components_main.iml" filepath="$PROJECT_DIR$/.idea/modules/nlp-components_main.iml" group="nlp-components" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nlp-components_test.iml" filepath="$PROJECT_DIR$/.idea/modules/nlp-components_test.iml" group="nlp-components" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus.iml" filepath="$PROJECT_DIR$/.idea/modules/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus.iml" group="reader-ncbi-disease-corpus" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus_main.iml" filepath="$PROJECT_DIR$/.idea/modules/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus_main.iml" group="reader-ncbi-disease-corpus" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus_test.iml" filepath="$PROJECT_DIR$/.idea/modules/reader-ncbi-disease-corpus/reader-ncbi-disease-corpus_test.iml" group="reader-ncbi-disease-corpus" />
     </modules>
   </component>
 </project>

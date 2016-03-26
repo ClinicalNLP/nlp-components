@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="clinicalnlp.ncbi.NCBIDiseaseCorpusReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-03-18T03:23:43" hostname="Williams-MacBook-Pro.local" time="29.848">
+  <properties/>
+  <testcase name="smokeTest" classname="clinicalnlp.ncbi.NCBIDiseaseCorpusReaderTest" time="29.848"/>
+  <system-out><![CDATA[0 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-test-util/2.0.0/e9bff1afd2fda95d95941a684dc6ede3eafd3ea5/cleartk-test-util-2.0.0.jar!/org/cleartk/test/util/type/TestTypeSystem.xml]
+15 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/Code/Schorndorfer/nlp-components/component-segmenter/build/libs/component-segmenter-1.0.jar!/descriptors/SegmentTypeSystem.xml]
+32 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-type-system/2.0.0/6808b7728cdec1e2f6c822a3c1f28fbbbd14a0bc/cleartk-type-system-2.0.0.jar!/org/cleartk/TypeSystem.xml]
+335 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-test-util/2.0.0/e9bff1afd2fda95d95941a684dc6ede3eafd3ea5/cleartk-test-util-2.0.0.jar!/org/cleartk/test/util/type/TestTypeSystem.xml]
+348 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/Code/Schorndorfer/nlp-components/component-segmenter/build/libs/component-segmenter-1.0.jar!/descriptors/SegmentTypeSystem.xml]
+359 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-type-system/2.0.0/6808b7728cdec1e2f6c822a3c1f28fbbbd14a0bc/cleartk-type-system-2.0.0.jar!/org/cleartk/TypeSystem.xml]
+523 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-test-util/2.0.0/e9bff1afd2fda95d95941a684dc6ede3eafd3ea5/cleartk-test-util-2.0.0.jar!/org/cleartk/test/util/type/TestTypeSystem.xml]
+527 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/Code/Schorndorfer/nlp-components/component-segmenter/build/libs/component-segmenter-1.0.jar!/descriptors/SegmentTypeSystem.xml]
+543 [Test worker] DEBUG org.apache.uima.resource.metadata.TypeSystemDescription  - Detected type system at [jar:file:/Users/WKT/.gradle/caches/modules-2/files-2.1/org.cleartk/cleartk-type-system/2.0.0/6808b7728cdec1e2f6c822a3c1f28fbbbd14a0bc/cleartk-type-system-2.0.0.jar!/org/cleartk/TypeSystem.xml]
+770 [Test worker] DEBUG org.springframework.validation.DataBinder  - DataBinder requires binding of required fields [corpusDir]
+933 [Test worker] DEBUG org.springframework.validation.DataBinder  - DataBinder requires binding of required fields []
+952 [Test worker] DEBUG org.springframework.validation.DataBinder  - DataBinder requires binding of required fields [scriptFileName]
+1005 [Test worker] INFO clinicalnlp.dsl.GroovyAnnotator  - Loading groovy script file: groovy/NCBIDiseaseCorpusWriter.groovy
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

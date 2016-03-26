@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="clinicalnlp.chunk.ChunkAnnotatorTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-03-26T01:54:11" hostname="Williams-MacBook-Pro.local" time="4.66">
+  <properties/>
+  <testcase name="smokeTest" classname="clinicalnlp.chunk.ChunkAnnotatorTest" time="1.78"/>
+  <testcase name="testWithSegmentSelected" classname="clinicalnlp.chunk.ChunkAnnotatorTest" time="1.0"/>
+  <testcase name="testWithNewlineSentenceBreakingPattern" classname="clinicalnlp.chunk.ChunkAnnotatorTest" time="0.54"/>
+  <testcase name="testWithSentenceBreakingPattern" classname="clinicalnlp.chunk.ChunkAnnotatorTest" time="0.522"/>
+  <testcase name="smokeTestOpenNLP" classname="clinicalnlp.chunk.ChunkAnnotatorTest" time="0.273"/>
+  <testcase name="testWithNoOptions" classname="clinicalnlp.chunk.ChunkAnnotatorTest" time="0.543"/>
+  <system-out><![CDATA[Sentence: Sally M. Smith
+
+1234567-8
+
+4/5/2006
+
+HISTORY OF PRESENT ILLNESS: Ms. Smith is a 43-year-old woman with past medical history that includes a pilonidal cyst.
+Sentence: This was apparently removed when she was 18.
+Sentence: Last July she presented with more pain in this area.
+Sentence: On exam, it was apparently unclear if there was a recurrence.
+Sentence: She was put on a course of Keflex and everything resolved.
+Sentence: She presents to walk-in today saying that same thing has happened.
+Sentence: She has had a couple days of increased swelling in this area.
+Sentence: No fevers.
+Sentence: Mild pain.
+Sentence: Bowel movements are fine.
+Sentence: PHYSICAL EXAMINATION: BP 122/74, pulse 82.
+Sentence: She is afebrile.
+Sentence: We had a female nurse chaperone in the room during the exam.
+Sentence: In the upper aspect of her gluteal cleft there were several scars from her prior surgery.
+Sentence: This area was mildly indurated.
+Sentence: There was absolutely no erythema or fluctuance and it was not tender at all.
+Sentence: No drainage.
+Sentence: ASSESSMENT AND PLAN: Possible recurrence of pilonidal cyst.
+Sentence: We do not see any active evidence of an infection, but given her apparent response last July, we will give her another one-week course of Keflex.
+Sentence: She will return to clinic if things do not resolve or if they get worse.
+Sentence: Nancy Student, MS3
+
+Seen with Joe Doctor, MD
+Sentence: A)  Left axillary level 1 sentinel lymph node (40 cps):
+     - Lymph node with no evidence of tumor.
+Sentence: B)  Left axillary level 1 sentinel lymph node (450 cps):
+     - Lymph node with no evidence of tumor.
+Sentence: C)  Left axillary sentinel lymph node (710 cps):
+     - Lymph node with no evidence of tumor.
+Sentence: D)  Left axillary non-sentinel lymph node:
+     - Lymph node with no evidence of tumor.
+Sentence: E)  Left breast, lumpectomy:
+- Breast tissue with healing biopsy site, florid proliferative
+breast disease and multifocal lobular carcinoma in-situ.
+Sentence: - No residual invasive carcinoma or ductal carcinoma in-situ
+identified.
+Sentence: Sally M. Smith
+Sentence: 1234567-8
+Sentence: 4/5/2006
+Sentence: HISTORY OF PRESENT ILLNESS:
+Sentence: Ms. Smith is a 43-year-old woman with past medical history that includes a pilonidal cyst.
+Sentence: This was apparently removed when she was 18.
+Sentence: Last July she presented with more pain in this area.
+Sentence: On exam, it was apparently unclear if there was a recurrence.
+Sentence: She was put on a course of Keflex and everything resolved.
+Sentence: She presents to walk-in today saying that same thing has happened.
+Sentence: She has had a couple days of increased swelling in this area.
+Sentence: No fevers.
+Sentence: Mild pain.
+Sentence: Bowel movements are fine.
+Sentence: PHYSICAL EXAMINATION:
+Sentence: BP 122/74, pulse 82.
+Sentence: She is afebrile.
+Sentence: We had a female nurse chaperone in the room during the exam.
+Sentence: In the upper aspect of her gluteal cleft there were several scars from her prior surgery.
+Sentence: This area was mildly indurated.
+Sentence: There was absolutely no erythema or fluctuance and it was not tender at all.
+Sentence: No drainage.
+Sentence: ASSESSMENT AND PLAN:
+Sentence: Possible recurrence of pilonidal cyst.
+Sentence: We do not see any active evidence of an infection, but given her apparent response last July, we will give her another one-week course of Keflex.
+Sentence: She will return to clinic if things do not resolve or if they get worse.
+Sentence: Nancy Student, MS3
+Sentence: Seen with Joe Doctor, MD
+Sentence: A)  Left axillary level 1 sentinel lymph node (40 cps):
+Sentence: - Lymph node with no evidence of tumor.
+Sentence: B)  Left axillary level 1 sentinel lymph node (450 cps):
+Sentence: - Lymph node with no evidence of tumor.
+Sentence: C)  Left axillary sentinel lymph node (710 cps):
+Sentence: - Lymph node with no evidence of tumor.
+Sentence: D)  Left axillary non-sentinel lymph node:
+Sentence: - Lymph node with no evidence of tumor.
+Sentence: E)  Left breast, lumpectomy:
+Sentence: - Breast tissue with healing biopsy site, florid proliferative
+breast disease and multifocal lobular carcinoma in-situ.
+Sentence: - No residual invasive carcinoma or ductal carcinoma in-situ
+identified.
+Sentence: (E) The previous biopsies (GHS03-5466) are reviewed and
+show ductal carcinoma in-situ and multiple foci of infiltrating of
+carcinoma with features of infiltrating lobular carcinoma.
+Sentence: An exact
+tumor size is difficult to ascertain, but is estimated at
+approximately 1.5 cm.
+Sentence: A)  Left axillary level 1 sentinel lymph node (40 cps):
+     - Lymph node with no evidence of tumor.
+Sentence: B)  Left axillary level 1 sentinel lymph node (450 cps):
+     - Lymph node with no evidence of tumor.
+Sentence: C)  Left axillary sentinel lymph node (710 cps):
+     - Lymph node with no evidence of tumor.
+Sentence: D)  Left axillary non-sentinel lymph node:
+     - Lymph node with no evidence of tumor.
+Sentence: E)  Left breast, lumpectomy:
+- Breast tissue with healing biopsy site, florid proliferative
+breast disease and multifocal lobular carcinoma in-situ.
+Sentence: - No residual invasive carcinoma or ductal carcinoma in-situ
+identified.
+Sentence: (E) The previous biopsies (GHS03-5466) are reviewed and
+show ductal carcinoma in-situ and multiple foci of infiltrating of
+carcinoma with features of infiltrating lobular carcinoma.
+Sentence: An exact
+tumor size is difficult to ascertain, but is estimated at
+approximately 1.5 cm.
+]]></system-out>
+  <system-err><![CDATA[Mar 25, 2016 8:54:15 PM opennlp.uima.sentdetect.AbstractSentenceDetector initialize(61)
+INFO: Initializing the OpenNLP Sentence annotator.
+Mar 25, 2016 8:54:15 PM opennlp.uima.util.AnnotatorUtil getOptionalParameter(440)
+INFO: opennlp.uima.IsRemoveExistingAnnotations = not set
+]]></system-err>
+</testsuite>

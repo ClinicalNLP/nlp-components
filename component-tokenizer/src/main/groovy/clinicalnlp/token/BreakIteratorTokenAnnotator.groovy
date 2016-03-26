@@ -88,7 +88,9 @@ public final class BreakIteratorTokenAnnotator extends JCasAnnotator_ImplBase {
 
     public static void main(String[] args) {
         AnalysisEngineDescription desc = AnalysisEngineFactory.createEngineDescription(
-                BreakIteratorTokenAnnotator)
+                BreakIteratorTokenAnnotator,
+                BreakIteratorTokenAnnotator.PARAM_CONTAINER_TYPE,
+                'org.cleartk.token.type.Sentence')
         PrintWriter writer = new PrintWriter(new File(args[0]))
         desc.toXML(writer)
         writer.close()

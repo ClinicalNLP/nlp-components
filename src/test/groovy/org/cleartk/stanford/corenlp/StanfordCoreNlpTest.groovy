@@ -18,29 +18,23 @@
  */
 package org.cleartk.stanford.corenlp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.fit.factory.AnalysisEngineFactory;
-import org.apache.uima.fit.testing.factory.TokenBuilder;
-import org.apache.uima.fit.util.JCasUtil;
-import org.cleartk.ne.type.NamedEntity;
-import org.cleartk.ne.type.NamedEntityMention;
-import org.cleartk.stanford.corenlp.StanfordCoreNlpAnnotator;
-import org.cleartk.syntax.constituent.type.TopTreebankNode;
-import org.cleartk.syntax.constituent.type.TreebankNode;
-import org.cleartk.syntax.dependency.type.DependencyNode;
-import org.cleartk.syntax.dependency.type.TopDependencyNode;
-import org.cleartk.test.util.CleartkTestBase;
-import org.cleartk.token.type.Sentence;
-import org.cleartk.token.type.Token;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.uima.analysis_engine.AnalysisEngine
+import org.apache.uima.fit.factory.AnalysisEngineFactory
+import org.apache.uima.fit.testing.factory.TokenBuilder
+import org.apache.uima.fit.util.JCasUtil
+import org.cleartk.ne.type.NamedEntity
+import org.cleartk.ne.type.NamedEntityMention
+import org.cleartk.syntax.constituent.type.TopTreebankNode
+import org.cleartk.syntax.constituent.type.TreebankNode
+import org.cleartk.syntax.dependency.type.DependencyNode
+import org.cleartk.syntax.dependency.type.TopDependencyNode
+import org.cleartk.test.util.CleartkTestBase
+import org.cleartk.token.type.Sentence
+import org.cleartk.token.type.Token
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Ignore
+import org.junit.Test
 
 /**
  * 
@@ -60,6 +54,7 @@ public class StanfordCoreNlpTest extends CleartkTestBase {
     tokenBuilder = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class, "pos", "stem")
   }
 
+  @Ignore
   @Test
   public void test() throws Throwable {
     this.assumeBigMemoryTestsEnabled()

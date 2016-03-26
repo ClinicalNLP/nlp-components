@@ -5,6 +5,8 @@ include 'component-groovy-dsl',
 		'component-dictionary',
 		'component-sentence-detector',
 		'component-tokenizer',
+		'component-pos-tagger',
+		'component-chunker',
 		'component-brat-annotator',
 		'component-relation-extractor',
 		'reader-ncbi-disease-corpus'

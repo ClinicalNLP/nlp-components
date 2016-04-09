@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Wed Jan 14 21:49:28 CST 2015 */
+/* First created by JCasGen Fri Apr 08 18:15:40 CDT 2016 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas; 
@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed Jan 14 21:49:32 CST 2015
- * XML source: C:/WKT/git/ClinicalNLP/nlp-components/component-segmenter/src/main/resources/descriptors/SegmentTypeSystem.xml
+ * Updated by JCasGen Fri Apr 08 18:15:40 CDT 2016
+ * XML source: /Users/WKT/Code/Schorndorfer/nlp-components/component-segmenter/src/main/resources/descriptors/SegmentTypeSystem.xml
  * @generated */
 public class SegmentHeading extends Annotation {
   /** @generated

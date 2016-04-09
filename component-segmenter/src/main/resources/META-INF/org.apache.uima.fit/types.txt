@@ -1,2 +1,4 @@
+classpath*:org/apache/ctakes/typesystem/types/TypeSystem.xml
 classpath*:org/cleartk/TypeSystem.xml
 classpath*:descriptors/SegmentTypeSystem.xml
+

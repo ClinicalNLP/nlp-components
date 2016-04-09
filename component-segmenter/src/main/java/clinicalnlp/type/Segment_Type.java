@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Fri Dec 12 23:55:03 CST 2014 */
+/* First created by JCasGen Fri Apr 08 18:15:40 CDT 2016 */
 package clinicalnlp.type;
 
 import org.apache.uima.jcas.JCas;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Jan 14 21:49:32 CST 2015
+ * Updated by JCasGen Fri Apr 08 18:15:40 CDT 2016
  * @generated */
 public class Segment_Type extends Annotation_Type {
   /** @generated 

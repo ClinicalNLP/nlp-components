@@ -1,4 +1,5 @@
 package clinicalnlp.dsl
+
 import static clinicalnlp.dsl.UIMAUtil.*
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline

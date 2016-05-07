@@ -5,23 +5,29 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline
 import static org.junit.Assert.*
-
-import de.tudarmstadt.ukp.dkpro.core.io.text.*;
+import groovy.util.logging.Log4j
 
 import java.util.regex.Matcher
 
+import org.apache.log4j.BasicConfigurator
+import org.apache.log4j.Level
 import org.apache.uima.analysis_engine.AnalysisEngine
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase
 import org.apache.uima.fit.factory.AggregateBuilder
 import org.apache.uima.jcas.JCas
 import org.cleartk.token.type.Sentence
+import org.junit.After
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 
 import clinicalnlp.dsl.GroovyAnnotator
 import clinicalnlp.dsl.UIMAUtil
 import clinicalnlp.type.NegatableNamedEntityMention
+import de.tudarmstadt.ukp.dkpro.core.io.text.*
 
+@Log4j
 class TestNegation {
 
     public static class NamedEntityMentionMatcher extends JCasAnnotator_ImplBase {
@@ -48,6 +54,20 @@ class TestNegation {
             }
         }
     }
+	
+	@BeforeClass
+	public static void setupClass() {
+		BasicConfigurator.configure()
+	}
+	
+	@Before
+	public void setUp() throws Exception {
+		log.setLevel(Level.INFO)
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
 
     @Test
     public void testNegationScope() {
